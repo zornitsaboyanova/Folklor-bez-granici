@@ -9,8 +9,7 @@ public class Shopska : MonoBehaviour
     bool canPress;
     void Start()
     {
-        shopska.transform.position = new Vector3(0, 1, 4.5f);
-        shopska1.transform.position = new Vector3(0, 1, 4.5f);
+        //shopska.transform.position = new Vector3(-0.0038f, 1.0375f, 0f);
         shopska.SetActive(true);
         shopska1.SetActive(false);
         canPress = true;
