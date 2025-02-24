@@ -1,68 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System.Diagnostics.Tracing;
-using UnityEngine.InputSystem;
 
 public class TakePhoto : MonoBehaviour
 {
-    public GameObject rawImage;
     public Camera phoneCamera;         // Assign the in-game camera
     public RenderTexture renderTexture; // Assign the phone screen RenderTexture
-    //public Image galleryImage;         // Assign the UI Image in the Gallery Panel
-    public GameObject galleryMenuPanel, shopskaGalleryPanel;    // Reference to the gallery panel
-    public GameObject cameraScanPanel;
-    public GameObject phonePanel;
-
-    public bool isGalleryOpen = false;
-    public bool isShopskaGalleryOpen = false;
-    public GameObject phoneGameObject;
-    Phone phone;
-
-    public GameObject imageSlotPrefab;
-    public Transform galleryGrid;
-    private List<string> savedPhotoPaths = new List<string>();
-
-    private void Start()
-    {
-        phone = phoneGameObject.GetComponent<Phone>();
-        LoadGallery();
-    }
-    private void Update()
-    {
-
-    }
-    public void PhoneButtonClick()
-    {
-        if (isGalleryOpen)
-        {
-            phone.canTakeAPhoto = true;
-            galleryMenuPanel.SetActive(false);
-            shopskaGalleryPanel.SetActive(false);
-            phonePanel.SetActive(false);
-            cameraScanPanel.SetActive(true);
-            Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            isGalleryOpen = false;
-            phone.isPhoneScanning = true;
-            GL.Clear(true, true, Color.black);
-            rawImage.SetActive(false);
-
-        }
-        else if(isShopskaGalleryOpen == true)
-        {
-            shopskaGalleryPanel.SetActive(false);
-            isShopskaGalleryOpen = false;
-        }
-    }
-
+    public Image galleryImage;         // Assign the UI Image in the Gallery Panel
+    public GameObject galleryPanel;    // Reference to the gallery panel
+    public string saveFolder = "Gallery"; // Folder name
 
     public void TakeAPhoto()
     {
-        rawImage.SetActive(true);
         StartCoroutine(CapturePhoto());
     }
 
@@ -70,68 +21,36 @@ public class TakePhoto : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        phoneCamera.targetTexture = renderTexture;
-        phoneCamera.Render();
-
         RenderTexture.active = renderTexture;
         Texture2D photo = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
         photo.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         photo.Apply();
         RenderTexture.active = null;
 
-        string fileName = "photo_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-        string filePath = Path.Combine(Application.persistentDataPath, fileName);
-
         // Save the photo
         byte[] bytes = photo.EncodeToPNG();
+        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
+
+        if (!Directory.Exists(folderPath))
+            Directory.CreateDirectory(folderPath);
+
+        string filePath = Path.Combine(folderPath, "photo_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png");
         File.WriteAllBytes(filePath, bytes);
-        //Debug.Log("Photo saved at: " + filePath);
+        Debug.Log("Photo saved at: " + filePath);
 
-        savedPhotoPaths.Add(filePath);
-
-        OpenGallery();
-
-        yield return new WaitForEndOfFrame();
-        phoneCamera.targetTexture = null;
-
-    }
-    void OpenGallery()
-    {
-        if(shopskaGalleryPanel != null)
-        {
-            phone.canTakeAPhoto = false;
-            shopskaGalleryPanel.SetActive(true);
-            isShopskaGalleryOpen = true;
-            cameraScanPanel.SetActive(false);
-            Time.timeScale = 0.0f;
-        }
-
-        LoadGallery();
-    }
-    public void LoadGallery()
-    {
-        foreach (Transform child in galleryGrid)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (string filePath in savedPhotoPaths)
-        {
-            StartCoroutine(LoadPhoto(filePath));
-        }
+        // Display in Gallery
+        StartCoroutine(LoadPhoto(filePath));
     }
 
-    private IEnumerator LoadPhoto(string filePath)
+    private IEnumerator LoadPhoto(string path)
     {
-        if (File.Exists(filePath))
-        {
-            byte[] fileData = File.ReadAllBytes(filePath);
-            Texture2D texture = new Texture2D(2, 2);
-            texture.LoadImage(fileData);
+        yield return new WaitForSeconds(0.5f); // Wait for the file to save
 
-            GameObject newImageSlot = Instantiate(imageSlotPrefab, galleryGrid);
-            newImageSlot.GetComponent<RawImage>().texture = texture;
-        }
-        yield return null;
+        byte[] fileData = File.ReadAllBytes(path);
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(fileData);
+
+        galleryImage.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        galleryPanel.SetActive(true); // Show the gallery panel
     }
 }
