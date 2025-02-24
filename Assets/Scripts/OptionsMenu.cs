@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    PauseMenu pauseMenu;
     [SerializeField]
     GameObject optionsMenuCanvas;
     [SerializeField]
@@ -16,18 +15,19 @@ public class OptionsMenu : MonoBehaviour
     
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume ); 
+        audioMixer.SetFloat("volume", volume ); //Настройки за звука
     }
     public void SetQuality(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        QualitySettings.SetQualityLevel(qualityIndex); //Настройки за качество
     }
     public void SetFullScreen(bool isFullScreen)
     {
-        Screen.fullScreen = isFullScreen;
+        Screen.fullScreen = isFullScreen; //Настройки за цял екран
     }
     public void OptionsExit()
     {
+        //Излизане от настройките и връщане в основното меню
         optionsMenuCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }

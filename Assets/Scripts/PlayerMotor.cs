@@ -18,6 +18,5 @@ public class PlayerMotor : MonoBehaviour
         _moveDirection.x = input.x;
         _moveDirection.z = input.y;
         controller.Move(transform.TransformDirection(_moveDirection) * speed * Time.deltaTime);
-        //Debug.Log(_playerVelocity.y);
     }
 }

@@ -5,28 +5,68 @@ using UnityEngine;
 public class Shopska : MonoBehaviour
 {
     [SerializeField]
-    GameObject shopska, shopska1;
-    bool canPress;
+    GameObject shopska, shopska1, shopska2, rodopska, shopska3;
+    bool canPress = true;
+
     void Start()
     {
-        //shopska.transform.position = new Vector3(-0.0038f, 1.0375f, 0f);
-        shopska.SetActive(true);
         shopska1.SetActive(false);
-        canPress = true;
+        shopska3.SetActive(false);
+        if (DoorInteraction.isShopskaDone == false)
+        {
+            shopska.SetActive(true);
+            shopska2.SetActive(false);
+        }
+        else if (DoorInteraction.isShopskaDone == true)
+        {
+            shopska.SetActive(false);
+            shopska2.SetActive(true);
+        }
     }
     private void OnMouseOver()
     {
         if (canPress == true)
         {
-            shopska1.SetActive(true);
+            if(DoorInteraction.isShopskaDone == false)
+            {
+                shopska1.SetActive(true);
+            }
+            else if(DoorInteraction.isShopskaDone == true)
+            {
+                Debug.Log("Mouse is over");
+                rodopska.SetActive(false);
+                shopska3.SetActive(true);
+            }
         }
     }
     private void OnMouseExit()
     {
-        shopska1.SetActive(false);
+        if(canPress == true)
+        {
+            if (DoorInteraction.isShopskaDone == false)
+            {
+                shopska1.SetActive(false);
+            }
+            else if (DoorInteraction.isShopskaDone == true)
+            {
+                rodopska.SetActive(true);
+                shopska3.SetActive(false);
+            }
+        }
     }
     private void OnMouseDown()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Shopska");
+        if(canPress == true)
+        {
+            if (DoorInteraction.isShopskaDone == false)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Shopska");
+            }
+            else if (DoorInteraction.isShopskaDone == true)
+            {
+                PhoneScan.isEverythingScanned = true;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Shopska");
+            }
+        }
     }
 }
