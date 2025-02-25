@@ -53,6 +53,7 @@ public class PhoneScan : MonoBehaviour
 
         if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
         {
+            Debug.Log("Woman");
             if (!isPlayingNosiaWoman)
             {
                 //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
@@ -81,6 +82,7 @@ public class PhoneScan : MonoBehaviour
 
         if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
         {
+            Debug.Log("Man");
             if (!isPlayingNosiaMan)
             {
                 //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
@@ -102,7 +104,8 @@ public class PhoneScan : MonoBehaviour
             }
         }
     }
-        void FoodScan()
+
+    void FoodScan()
     {
         //Храната се засича от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -113,6 +116,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == foodObject)
             {
+                Debug.Log("Food");
                 if(!isPlayingFood)
                 {
                     //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
@@ -146,6 +150,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == shevicaObject)
             {
+                Debug.Log("Shevica");
                 if (!isPlayingShevica)
                 {
                     //Когато телефонът засече шевица и аудиото не е пуснато - аудиото се пуска
@@ -178,6 +183,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == musicalInstrumentObject)
             {
+                Debug.Log("Gydulka");
                 if (!isPlayingMusicalInstrument)
                 {
                     isPlayingMusicalInstrument = true;
@@ -208,6 +214,7 @@ public class PhoneScan : MonoBehaviour
         {
             if (hit.transform == musicalInstrumentObject1)
             {
+                Debug.Log("Typan");
                 if (!isPlayingMusicalInstrument1)
                 {
                     isPlayingMusicalInstrument1 = true;

@@ -22,18 +22,20 @@ public class Phone : MonoBehaviour
     TakePhoto takePhoto;
     void Start()
     {
+        takePhoto = shopskaGalleryPanel.GetComponent<TakePhoto>();
+
         phoneOffPanel.SetActive(false);
+        cameraScanPanel.SetActive(false);
         cameraScanButtonClickPanel.SetActive(false);
         phonePanel.SetActive(false);
         galleryMenuPanel.SetActive(false);
         shopskaGalleryPanel.SetActive(false);
         filesPanel.SetActive(false);
         
-        cameraScanPanel.SetActive(false);
+        
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        takePhoto = shopskaGalleryPanel.GetComponent<TakePhoto>();
         takePhoto.rawImage.SetActive(false);
     }
 
