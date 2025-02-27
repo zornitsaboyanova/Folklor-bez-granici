@@ -143,6 +143,7 @@ public class Phone : MonoBehaviour
             Debug.Log("Button is pressed!");
             galleryMenuPanel.SetActive(false);
             phonePanel.SetActive(true);
+            isGalleryOpen = false;
         }
     }
 }

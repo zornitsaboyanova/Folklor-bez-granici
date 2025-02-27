@@ -6,20 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class DoorInteraction : MonoBehaviour
 {
-    public GameObject interactionUI;
+    public GameObject interactionUI, interactionUI1;
     private bool isPlayerNear = false;
     public static bool isShopskaDone = false;
 
     void Start()
     {
         interactionUI.SetActive(false);
+        interactionUI1.SetActive(false);
     }
 
     void Update()
     {
-        if(isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
-            if(PhoneScan.isEverythingScanned == true)
+            if (PhoneScan.isEverythingScanned == true)
             {
                 if (SceneManager.GetActiveScene().name == "Shopska")
                 {
@@ -32,7 +33,8 @@ public class DoorInteraction : MonoBehaviour
             }
             else
             {
-                Debug.Log("Все още не може да излезеш от стаята! Сканирай и се запознай с всички обекти първо.");
+                interactionUI.SetActive(false);
+                interactionUI1.SetActive(true);
             }
         }
     }
@@ -50,6 +52,7 @@ public class DoorInteraction : MonoBehaviour
         {
             isPlayerNear = false;
             interactionUI.SetActive(false);
+            interactionUI1.SetActive(false);
         }
     }
 }

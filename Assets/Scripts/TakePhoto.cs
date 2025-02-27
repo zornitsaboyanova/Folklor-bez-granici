@@ -24,6 +24,7 @@ public class TakePhoto : MonoBehaviour
     public GameObject imageSlotPrefab;
     public Transform galleryGrid;
     private List<string> savedPhotoPaths = new List<string>();
+    private const string PhotosKey = "SavedPhotos"; // Key for PlayerPrefs
 
     private void Start()
     {
@@ -52,8 +53,9 @@ public class TakePhoto : MonoBehaviour
             rawImage.SetActive(false);
 
         }
-        else if (isShopskaGalleryOpen == true)
+        else if (isShopskaGalleryOpen == true && phone.isGalleryOpen == true)
         {
+            galleryMenuPanel.SetActive(true);
             shopskaGalleryPanel.SetActive(false);
             isShopskaGalleryOpen = false;
         }
@@ -88,6 +90,7 @@ public class TakePhoto : MonoBehaviour
         //Debug.Log("Photo saved at: " + filePath);
 
         savedPhotoPaths.Add(filePath);
+        SavePhotoPaths();
 
         OpenGallery();
 
@@ -110,10 +113,13 @@ public class TakePhoto : MonoBehaviour
     }
     public void LoadGallery()
     {
+        //delete old photos
         foreach (Transform child in galleryGrid)
         {
             Destroy(child.gameObject);
         }
+
+        LoadPhotoPaths();
 
         foreach (string filePath in savedPhotoPaths)
         {
@@ -133,5 +139,26 @@ public class TakePhoto : MonoBehaviour
             newImageSlot.GetComponent<RawImage>().texture = texture;
         }
         yield return null;
+    }
+
+    private void SavePhotoPaths()
+    {
+        string pathsString = string.Join("|", savedPhotoPaths);
+        PlayerPrefs.SetString(PhotosKey, pathsString);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadPhotoPaths()
+    {
+        savedPhotoPaths.Clear();
+
+        if (PlayerPrefs.HasKey(PhotosKey))
+        {
+            string pathsString = PlayerPrefs.GetString(PhotosKey);
+            if (!string.IsNullOrEmpty(pathsString))
+            {
+                savedPhotoPaths.AddRange(pathsString.Split('|'));
+            }
+        }
     }
 }

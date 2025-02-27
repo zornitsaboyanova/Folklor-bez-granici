@@ -48,58 +48,62 @@ public class PhoneScan : MonoBehaviour
     }
     void NosiaWomanScan()
     {
-        //Носиите се засичат от камерата чрез RectTransform
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(nosiaWomanObject.position);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+        RaycastHit hit;
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
+        if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Woman");
-            if (!isPlayingNosiaWoman)
+            if (hit.transform == nosiaWomanObject)
             {
-                //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
-                isPlayingNosiaWoman = true;
-                isNosiaWomanScanned = true;
-                detectionCoroutine = StartCoroutine(DelaySound());
-            }
-        }
-        else
-        {
-            if (isPlayingNosiaWoman)
-            {
-                //Когато телефонът спре да засича носията и аудиото е пуснато - аудиото се спира
-                isPlayingNosiaWoman = false;
-                if(detectionCoroutine != null)
+                Debug.Log("Woman");
+                if (!isPlayingNosiaWoman)
                 {
-                    StopCoroutine(detectionCoroutine);
+                    isPlayingNosiaWoman = true;
+                    isNosiaWomanScanned = true;
+                    detectionCoroutine = StartCoroutine(DelaySound());
+                }
+            }
+            else
+            {
+                if (isPlayingNosiaWoman)
+                {
+                    isPlayingNosiaWoman = false;
+                    if (detectionCoroutine != null)
+                    {
+                        StopCoroutine(detectionCoroutine);
+                    }
                 }
             }
         }
     }
     void NosiaManScan()
     {
-        //Носиите се засичат от камерата чрез RectTransform
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(nosiaManObject.position);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+        RaycastHit hit;
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
+        if(Physics.Raycast(ray,out hit) )
         {
-            Debug.Log("Man");
-            if (!isPlayingNosiaMan)
+            if (hit.transform == nosiaManObject)
             {
-                //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
-                isPlayingNosiaMan = true;
-                isNosiaManScanned = true;
-                detectionCoroutine = StartCoroutine(DelaySound());
-            }
-        }
-        else
-        {
-            if (isPlayingNosiaMan)
-            {
-                //Когато телефонът спре да засича носията и аудиото е пуснато - аудиото се спира
-                isPlayingNosiaMan = false;
-                if (detectionCoroutine != null)
+                Debug.Log("Man");
+                if (!isPlayingNosiaMan)
                 {
-                    StopCoroutine(detectionCoroutine);
+                    isPlayingNosiaMan = true;
+                    isNosiaManScanned = true;
+                    detectionCoroutine = StartCoroutine(DelaySound());
+                }
+            }
+            else
+            {
+                if (isPlayingNosiaMan)
+                {
+                    isPlayingNosiaMan=false;
+                    if(detectionCoroutine != null)
+                    {
+                        StopCoroutine(detectionCoroutine);
+                    }
                 }
             }
         }
