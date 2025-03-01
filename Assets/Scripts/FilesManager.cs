@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FilesManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject phonePanel, filePanel, playButton, stopButton, playButtonImage, stopButtonImage, fadeImage, lockImage;
+    GameObject phonePanel,filesMenuPanel, filePanel, playButton, stopButton, playButtonImage, stopButtonImage, fadeImage, lockImage;
     [SerializeField]
     AudioSource audioSource;
     PhoneScan phoneScan;
@@ -18,6 +18,7 @@ public class FilesManager : MonoBehaviour
     {
         phoneScan = cameraScan.GetComponent<PhoneScan>();
         phonePanel.SetActive(false);
+        filesMenuPanel.SetActive(true);
         filePanel.SetActive(true);
         playButton.SetActive(true);
         playButtonImage.SetActive(true);
@@ -114,7 +115,7 @@ public class FilesManager : MonoBehaviour
 
     public void PhoneButtonOnClick()
     {
-        filePanel.SetActive(false);
+        filesMenuPanel.SetActive(false);
         phonePanel.SetActive(true);
     }
 }

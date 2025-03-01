@@ -48,61 +48,68 @@ public class PhoneScan : MonoBehaviour
     }
     void NosiaWomanScan()
     {
-        //Носиите се засичат от камерата чрез RectTransform
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(nosiaWomanObject.position);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+        RaycastHit hit;
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
+        if (Physics.Raycast(ray, out hit))
         {
-            if (!isPlayingNosiaWoman)
+            if (hit.transform == nosiaWomanObject)
             {
-                //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
-                isPlayingNosiaWoman = true;
-                isNosiaWomanScanned = true;
-                detectionCoroutine = StartCoroutine(DelaySound());
-            }
-        }
-        else
-        {
-            if (isPlayingNosiaWoman)
-            {
-                //Когато телефонът спре да засича носията и аудиото е пуснато - аудиото се спира
-                isPlayingNosiaWoman = false;
-                if(detectionCoroutine != null)
+                Debug.Log("Woman");
+                if (!isPlayingNosiaWoman)
                 {
-                    StopCoroutine(detectionCoroutine);
+                    isPlayingNosiaWoman = true;
+                    isNosiaWomanScanned = true;
+                    detectionCoroutine = StartCoroutine(DelaySound());
+                }
+            }
+            else
+            {
+                if (isPlayingNosiaWoman)
+                {
+                    isPlayingNosiaWoman = false;
+                    if (detectionCoroutine != null)
+                    {
+                        StopCoroutine(detectionCoroutine);
+                    }
                 }
             }
         }
     }
     void NosiaManScan()
     {
-        //Носиите се засичат от камерата чрез RectTransform
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(nosiaManObject.position);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+        RaycastHit hit;
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(cameraScanPanel, screenPos))
+        if(Physics.Raycast(ray,out hit) )
         {
-            if (!isPlayingNosiaMan)
+            if (hit.transform == nosiaManObject)
             {
-                //Когато телефонът засече носия и аудиото не е пуснато - да се пусне аудиото
-                isPlayingNosiaMan = true;
-                isNosiaManScanned = true;
-                detectionCoroutine = StartCoroutine(DelaySound());
-            }
-        }
-        else
-        {
-            if (isPlayingNosiaMan)
-            {
-                //Когато телефонът спре да засича носията и аудиото е пуснато - аудиото се спира
-                isPlayingNosiaMan = false;
-                if (detectionCoroutine != null)
+                Debug.Log("Man");
+                if (!isPlayingNosiaMan)
                 {
-                    StopCoroutine(detectionCoroutine);
+                    isPlayingNosiaMan = true;
+                    isNosiaManScanned = true;
+                    detectionCoroutine = StartCoroutine(DelaySound());
+                }
+            }
+            else
+            {
+                if (isPlayingNosiaMan)
+                {
+                    isPlayingNosiaMan=false;
+                    if(detectionCoroutine != null)
+                    {
+                        StopCoroutine(detectionCoroutine);
+                    }
                 }
             }
         }
     }
-        void FoodScan()
+
+    void FoodScan()
     {
         //Храната се засича от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -113,6 +120,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == foodObject)
             {
+                Debug.Log("Food");
                 if(!isPlayingFood)
                 {
                     //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
@@ -146,6 +154,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == shevicaObject)
             {
+                Debug.Log("Shevica");
                 if (!isPlayingShevica)
                 {
                     //Когато телефонът засече шевица и аудиото не е пуснато - аудиото се пуска
@@ -178,6 +187,7 @@ public class PhoneScan : MonoBehaviour
         {
             if(hit.transform == musicalInstrumentObject)
             {
+                Debug.Log("Gydulka");
                 if (!isPlayingMusicalInstrument)
                 {
                     isPlayingMusicalInstrument = true;
@@ -208,6 +218,7 @@ public class PhoneScan : MonoBehaviour
         {
             if (hit.transform == musicalInstrumentObject1)
             {
+                Debug.Log("Typan");
                 if (!isPlayingMusicalInstrument1)
                 {
                     isPlayingMusicalInstrument1 = true;

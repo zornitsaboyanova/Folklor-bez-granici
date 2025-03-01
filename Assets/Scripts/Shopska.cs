@@ -6,7 +6,7 @@ public class Shopska : MonoBehaviour
 {
     [SerializeField]
     GameObject shopska, shopska1, shopska2, rodopska, shopska3;
-    bool canPress = true;
+    public bool canPress;
 
     void Start()
     {
