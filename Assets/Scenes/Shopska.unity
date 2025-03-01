@@ -1534,6 +1534,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7e0a20a711582f34c88f2aaa7c0b7092, type: 3}
   m_PrefabInstance: {fileID: 270473260}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &293279644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8700725330082129686, guid: 9c70749faac9f3847b4a6f7013e215a1, type: 3}
@@ -1541,11 +1542,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &293279648
 BoxCollider:
+=======
+--- !u!1 &346258159
+GameObject:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 293279644}
+=======
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 346258162}
+  - component: {fileID: 346258161}
+  - component: {fileID: 346258160}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!154 &346258160
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346258159}
+>>>>>>> Stashed changes
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1554,6 +1581,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+<<<<<<< Updated upstream
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -1567,10 +1595,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &307952260
 MonoBehaviour:
+=======
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_TerrainData: {fileID: 15600000, guid: e7a1a719edc134d4d9ffa360f6e70c8a, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &346258161
+Terrain:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 307952256}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1620,10 +1658,49 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &323694579
 MonoBehaviour:
+=======
+  m_GameObject: {fileID: 346258159}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: e7a1a719edc134d4d9ffa360f6e70c8a, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_IgnoreQualitySettings: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ReceiveGI: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+  m_EnableHeightmapRayTracing: 1
+  m_EnableTreesAndDetailsRayTracing: 0
+  m_TreeMotionVectorModeOverride: 3
+--- !u!4 &346258162
+Transform:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 323694578}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1810,6 +1887,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405278074}
   m_CullTransparentMesh: 1
+=======
+  m_GameObject: {fileID: 346258159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -53.5, y: 0, z: -34.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
 --- !u!1 &423920918
 GameObject:
   m_ObjectHideFlags: 0
@@ -12748,10 +12836,22 @@ SceneRoots:
   - {fileID: 423920920}
   - {fileID: 6944575539501341239}
   - {fileID: 1853793568}
+<<<<<<< Updated upstream
   - {fileID: 430825495}
+=======
+  - {fileID: 994965685}
+  - {fileID: 1513289601}
+  - {fileID: 44554842}
+  - {fileID: 765367952}
+>>>>>>> Stashed changes
   - {fileID: 1451969826}
   - {fileID: 1539547567}
   - {fileID: 2140174864}
   - {fileID: 936956440}
   - {fileID: 990854213}
+<<<<<<< Updated upstream
   - {fileID: 1161716268}
+=======
+  - {fileID: 346258162}
+  - {fileID: 430825495}
+>>>>>>> Stashed changes
