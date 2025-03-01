@@ -12,13 +12,11 @@ public class TakePhoto : MonoBehaviour
     public Camera phoneCamera;         // Assign the in-game camera
     public RenderTexture renderTexture; // Assign the phone screen RenderTexture
     //public Image galleryImage;         // Assign the UI Image in the Gallery Panel
-    public GameObject galleryMenuPanel, shopskaGalleryPanel, rodopskaGalleryPanel;    // Reference to the gallery panel
+    public GameObject galleryMenuPanel;   // Reference to the gallery panel
     public GameObject cameraScanPanel;
     public GameObject phonePanel;
 
     public bool isGalleryOpen = false;
-    public bool isShopskaGalleryOpen = false;
-    public bool isRodopskaGalleryOpen = false;
 
     public GameObject phoneGameObject;
     Phone phone;
@@ -43,7 +41,6 @@ public class TakePhoto : MonoBehaviour
         {
             phone.canTakeAPhoto = true;
             galleryMenuPanel.SetActive(false);
-            shopskaGalleryPanel.SetActive(false);
             phonePanel.SetActive(false);
             cameraScanPanel.SetActive(true);
             Time.timeScale = 1.0f;
@@ -55,12 +52,11 @@ public class TakePhoto : MonoBehaviour
             rawImage.SetActive(false);
 
         }
-        else if (phone.isGalleryOpen == true)
+        else if (phone.isGalleryOpen)
         {
-            galleryMenuPanel.SetActive(true);
-            shopskaGalleryPanel.SetActive(false);
-            rodopskaGalleryPanel.SetActive(false);
-            isShopskaGalleryOpen = false;
+            galleryMenuPanel.SetActive(false);
+            phonePanel.SetActive(true);
+            phone.isGalleryOpen = false;
         }
     }
 
@@ -103,11 +99,11 @@ public class TakePhoto : MonoBehaviour
     }
     void OpenGallery()
     {
-        if (shopskaGalleryPanel != null)
+        if (galleryMenuPanel != null)
         {
             phone.canTakeAPhoto = false;
-            shopskaGalleryPanel.SetActive(true);
-            isShopskaGalleryOpen = true;
+            galleryMenuPanel.SetActive(true);
+            isGalleryOpen = true;
             cameraScanPanel.SetActive(false);
             Time.timeScale = 0.0f;
         }

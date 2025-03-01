@@ -6,13 +6,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using TMPro;
-using System.Linq.Expressions;
 
 public class Phone : MonoBehaviour
 {
     [SerializeField]
     GameObject phoneOffPanel, phonePanel, cameraScanPanel, pauseMenuCanvas, cameraScanButtonClickPanel, galleryMenuPanel, filesPanel;
-    [SerializeField] GameObject shopskaGalleryPanel, rodopskaGalleryPanel;
     public bool isPhoneOpen = false;
     bool isPhoneOn = false;
     public bool isPhoneScanning = false;
@@ -22,15 +20,13 @@ public class Phone : MonoBehaviour
     TakePhoto takePhoto;
     void Start()
     {
-        takePhoto = shopskaGalleryPanel.GetComponent<TakePhoto>();
+        takePhoto = galleryMenuPanel.GetComponent<TakePhoto>();
 
         phoneOffPanel.SetActive(false);
         cameraScanPanel.SetActive(false);
         cameraScanButtonClickPanel.SetActive(false);
         phonePanel.SetActive(false);
         galleryMenuPanel.SetActive(false);
-        shopskaGalleryPanel.SetActive(false);
-        rodopskaGalleryPanel.SetActive(false);
         filesPanel.SetActive(false);
         
         
@@ -46,14 +42,13 @@ public class Phone : MonoBehaviour
         {
             PhoneAction();
         }
-       if (Input.GetKeyDown(KeyCode.Space) && cameraScanPanel == true)
+       if (Input.GetKeyDown(KeyCode.Space) && cameraScanPanel == true &&isPhoneScanning == true)
         {
             cameraScanButtonClickPanel.SetActive(true);
 
             if (takePhoto.isGalleryOpen == false && canTakeAPhoto == true)
             {
                 galleryMenuPanel.SetActive(true);
-                shopskaGalleryPanel.SetActive(true);
                 takePhoto.isGalleryOpen = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -131,17 +126,7 @@ public class Phone : MonoBehaviour
         filesPanel.SetActive(true);
         phonePanel.SetActive(false);
     }
-    public void ShopskaGalleryButtonOnClick()
-    {
-        takePhoto.isShopskaGalleryOpen = true;
-        shopskaGalleryPanel.SetActive(true);
-    }
-    public void RodopskaGalleryButtonOnClick()
-    {
-        takePhoto.isRodopskaGalleryOpen = true;
-        rodopskaGalleryPanel.SetActive(true);
-    }
-    public void GalleryPhoneButtonOnClick()
+    /*public void GalleryPhoneButtonOnClick()
     {
         if (isGalleryOpen && !takePhoto.isShopskaGalleryOpen)
         {
@@ -150,5 +135,5 @@ public class Phone : MonoBehaviour
             phonePanel.SetActive(true);
             isGalleryOpen = false;
         }
-    }
+    }*/
 }

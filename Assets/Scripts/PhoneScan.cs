@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PhoneScan : MonoBehaviour
 {
@@ -29,12 +30,19 @@ public class PhoneScan : MonoBehaviour
     public bool isMusicalInstrument1Scanned = false;
     public static bool isEverythingScanned = false;
 
-    private const string nosiaWomanKey = "NosiaWomanScanned";
-    private const string nosiaManKey = "NosiaManScanned";
-    private const string foodKey = "FoodScanned";
-    private const string shevicaKey = "ShevicaScanned";
-    private const string musicalInstrumentKey = "MusicalInstrumentScanned";
-    private const string musicalInstrument1Key = "MusicalInstrument1Scanned";
+    private const string shopskaNosiaWomanKey = "ShopskaNosiaWomanScanned";
+    private const string shopskaNosiaManKey = "ShopskaNosiaManScanned";
+    private const string pitkaKey = "PitkaScanned";
+    private const string shopskaShevicaKey = "ShopskaShevicaScanned";
+    private const string gydulkaKey = "GydulkaScanned";
+    private const string typanKey = "TypanScanned";
+
+    private const string rodopskaNosiaWomanKey = "RodopskaNosiaWomanScanned";
+    private const string rodopskaNosiaManKey = "RodopskaNosiaManScanned";
+    private const string banicaKey = "BanicaScanned";
+    private const string rodopskaShevicaKey = "rodopskaShevicaScanned";
+    private const string gaidaKey = "GaidaKey";
+
     private const string everythingKey = "EverythingScanned";
 
     public AudioSource audioSource1, audioSource2, audioSource3, audioSource4, audioSource5, audioSource6;
@@ -74,8 +82,16 @@ public class PhoneScan : MonoBehaviour
                     isPlayingNosiaWoman = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isNosiaWomanScanned = true;
-                    PlayerPrefs.SetInt(nosiaWomanKey, 1);
-                    PlayerPrefs.Save();
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(shopskaNosiaWomanKey, 1);
+                        PlayerPrefs.Save();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Rodopska")
+                    {
+                        PlayerPrefs.SetInt(rodopskaNosiaWomanKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else
@@ -110,8 +126,17 @@ public class PhoneScan : MonoBehaviour
                     isPlayingNosiaMan = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isNosiaManScanned = true;
-                    PlayerPrefs.SetInt(nosiaWomanKey, 1);
-                    PlayerPrefs.Save();
+
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(shopskaNosiaManKey, 1);
+                        PlayerPrefs.Save();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Rodopska")
+                    {
+                        PlayerPrefs.SetInt(rodopskaNosiaManKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else
@@ -146,8 +171,17 @@ public class PhoneScan : MonoBehaviour
                     isPlayingFood = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isFoodScanned = true;
-                    PlayerPrefs.SetInt(foodKey, 1);
-                    PlayerPrefs.Save();
+
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(pitkaKey, 1);
+                        PlayerPrefs.Save();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Rodopska")
+                    {
+                        PlayerPrefs.SetInt(banicaKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else
@@ -182,8 +216,17 @@ public class PhoneScan : MonoBehaviour
                     isPlayingShevica = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isShevicaScanned = true;
-                    PlayerPrefs.SetInt(shevicaKey, 1);
-                    PlayerPrefs.Save();
+
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(shopskaShevicaKey, 1);
+                        PlayerPrefs.Save();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Rodopska")
+                    {
+                        PlayerPrefs.SetInt(rodopskaShevicaKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else
@@ -216,8 +259,17 @@ public class PhoneScan : MonoBehaviour
                     isPlayingMusicalInstrument = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isMusicalInstrumentScanned = true;
-                    PlayerPrefs.SetInt(musicalInstrumentKey, 1);
-                    PlayerPrefs.Save();
+
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(gydulkaKey, 1);
+                        PlayerPrefs.Save();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Rodopska")
+                    {
+                        PlayerPrefs.SetInt(gaidaKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else
@@ -249,8 +301,11 @@ public class PhoneScan : MonoBehaviour
                     isPlayingMusicalInstrument1 = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                     isMusicalInstrument1Scanned = true;
-                    PlayerPrefs.SetInt(musicalInstrument1Key, 1);
-                    PlayerPrefs.Save();
+                    if (SceneManager.GetActiveScene().name == "Shopska")
+                    {
+                        PlayerPrefs.SetInt(typanKey, 1);
+                        PlayerPrefs.Save();
+                    }
                 }
             }
             else

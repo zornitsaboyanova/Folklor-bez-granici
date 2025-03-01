@@ -25,16 +25,6 @@ public class FilesManager : MonoBehaviour
         stopButton.SetActive(false);
         stopButtonImage.SetActive(false);
 
-        if (PhoneScan.isEverythingScanned == true)
-        {
-            fadeImage.SetActive(false);
-            lockImage.SetActive(false);
-        }
-        else
-        {
-            fadeImage.SetActive(true);
-            lockImage.SetActive(true);
-        }
     }
 
     void Update()
@@ -43,37 +33,67 @@ public class FilesManager : MonoBehaviour
         {
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("NosiaWomanScanned", 0) == 1 && this.gameObject.name == "File1_panel")
+        if (PlayerPrefs.GetInt("ShopskaNosiaWomanScanned", 0) == 1 && this.gameObject.name == "File1_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("NosiaManScanned", 0) == 1 && this.gameObject.name == "File2_panel")
+        if (PlayerPrefs.GetInt("ShopskaNosiaManScanned", 0) == 1 && this.gameObject.name == "File2_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("FoodScanned", 0) == 1 && this.gameObject.name == "File3_panel")
+        if (PlayerPrefs.GetInt("PitkaScanned", 0) == 1 && this.gameObject.name == "File3_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("ShevicaScanned", 0) == 1 && this.gameObject.name == "File4_panel")
+        if (PlayerPrefs.GetInt("ShopskaShevicaScanned", 0) == 1 && this.gameObject.name == "File4_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("MusicalInstrumemtScanned", 0) == 1 && this.gameObject.name == "File5_panel")
+        if (PlayerPrefs.GetInt("GydulkaScanned", 0) == 1 && this.gameObject.name == "File5_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (PlayerPrefs.GetInt("MusicalInstrument1Scanned", 0) == 1 && this.gameObject.name == "File6_panel")
+        if (PlayerPrefs.GetInt("TypanScanned", 0) == 1 && this.gameObject.name == "File6_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("RodopskaNosiaWomanScanned", 0) == 1 && this.gameObject.name == "File7_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("RodopskaNosiaManScanned", 0) == 1 && this.gameObject.name == "File8_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("BanicaScanned", 0) == 1 && this.gameObject.name == "File9_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("RodopskaShevicaScanned", 0) == 1 && this.gameObject.name == "File10_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("GaidaScanned", 0) == 1 && this.gameObject.name == "File11_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
