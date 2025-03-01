@@ -15,9 +15,9 @@ public class Dialogue2 : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject dialogueBox;
 
-   // public GameObject player;
-   // PlayerMotor playerMotor;
-    //PlayerLook playerLook;
+    public GameObject player;
+    PlayerMotor playerMotor;
+    PlayerLook playerLook;
     private const string dialogueKey = "Dialogue2Shown";
     void Start()
     {
@@ -36,10 +36,11 @@ public class Dialogue2 : MonoBehaviour
         PlayerPrefs.SetInt(dialogueKey, 1); // Записваме, че вече е стартирал
         PlayerPrefs.Save();
 
-        //playerMotor = player.GetComponent<PlayerMotor>();
-        //playerLook = player.GetComponent<PlayerLook>();
+        playerMotor = player.GetComponent<PlayerMotor>();
+        playerLook = player.GetComponent<PlayerLook>();
 
-
+        playerMotor.canMove = false;
+        playerLook.canLook = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -53,7 +54,7 @@ public class Dialogue2 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(textComponent.text == lines[index])
+            if (textComponent.text == lines[index])
             {
                 NextLine();
             }
@@ -90,7 +91,7 @@ public class Dialogue2 : MonoBehaviour
 
     void NextLine()
     {
-        if(index < lines.Length - 1)
+        if (index < lines.Length - 1)
         {
             index++;
             textComponent.text = string.Empty;
@@ -99,9 +100,11 @@ public class Dialogue2 : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
-           // playerMotor.canMove = true;
-            //playerLook.canLook = true;
+            dialogueBox.SetActive(false);
+
+            playerMotor.canMove = true;
+            playerLook.canLook = true;
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

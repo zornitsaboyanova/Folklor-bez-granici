@@ -9,6 +9,7 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     public float xSensitivity = 30f;
     private float ySensitivity = 30f;
+    public bool canLook = true;
 
     private void Start()
     {
@@ -17,6 +18,11 @@ public class PlayerLook : MonoBehaviour
     }
     public void ProcessLook(Vector2 input)
     {
+        if (!canLook)
+        {
+            return;
+        }
+
         float mouseX = input.x;
         float mouseY = input.y;
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;

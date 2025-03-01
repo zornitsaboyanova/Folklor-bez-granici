@@ -39,41 +39,41 @@ public class FilesManager : MonoBehaviour
 
     void Update()
     {
-        if (PhoneScan.isEverythingScanned == true)
+        if (PlayerPrefs.GetInt("EverythingScanned", 0) == 1 == true)
         {
             canPlay = true;
         }
-        if (phoneScan.isNosiaWomanScanned && this.gameObject.name == "File1_panel")
-        {
-            fadeImage.SetActive(false);
-            lockImage.SetActive(false);
-            canPlay = true;
-        }
-        if (phoneScan.isNosiaManScanned && this.gameObject.name == "File2_panel")
+        if (PlayerPrefs.GetInt("NosiaWomanScanned", 0) == 1 && this.gameObject.name == "File1_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (phoneScan.isShevicaScanned && this.gameObject.name == "File3_panel")
+        if (PlayerPrefs.GetInt("NosiaManScanned", 0) == 1 && this.gameObject.name == "File2_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (phoneScan.isFoodScanned && this.gameObject.name == "File4_panel")
+        if (PlayerPrefs.GetInt("FoodScanned", 0) == 1 && this.gameObject.name == "File3_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (phoneScan.isMusicalInstrumentScanned && this.gameObject.name == "File5_panel")
+        if (PlayerPrefs.GetInt("ShevicaScanned", 0) == 1 && this.gameObject.name == "File4_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
             canPlay = true;
         }
-        if (phoneScan.isMusicalInstrument1Scanned && this.gameObject.name == "File6_panel")
+        if (PlayerPrefs.GetInt("MusicalInstrumemtScanned", 0) == 1 && this.gameObject.name == "File5_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("MusicalInstrument1Scanned", 0) == 1 && this.gameObject.name == "File6_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);

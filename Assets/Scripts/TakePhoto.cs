@@ -12,12 +12,14 @@ public class TakePhoto : MonoBehaviour
     public Camera phoneCamera;         // Assign the in-game camera
     public RenderTexture renderTexture; // Assign the phone screen RenderTexture
     //public Image galleryImage;         // Assign the UI Image in the Gallery Panel
-    public GameObject galleryMenuPanel, shopskaGalleryPanel;    // Reference to the gallery panel
+    public GameObject galleryMenuPanel, shopskaGalleryPanel, rodopskaGalleryPanel;    // Reference to the gallery panel
     public GameObject cameraScanPanel;
     public GameObject phonePanel;
 
     public bool isGalleryOpen = false;
     public bool isShopskaGalleryOpen = false;
+    public bool isRodopskaGalleryOpen = false;
+
     public GameObject phoneGameObject;
     Phone phone;
 
@@ -53,10 +55,11 @@ public class TakePhoto : MonoBehaviour
             rawImage.SetActive(false);
 
         }
-        else if (isShopskaGalleryOpen == true && phone.isGalleryOpen == true)
+        else if (phone.isGalleryOpen == true)
         {
             galleryMenuPanel.SetActive(true);
             shopskaGalleryPanel.SetActive(false);
+            rodopskaGalleryPanel.SetActive(false);
             isShopskaGalleryOpen = false;
         }
     }

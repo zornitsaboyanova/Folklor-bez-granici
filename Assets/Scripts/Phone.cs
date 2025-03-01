@@ -12,7 +12,7 @@ public class Phone : MonoBehaviour
 {
     [SerializeField]
     GameObject phoneOffPanel, phonePanel, cameraScanPanel, pauseMenuCanvas, cameraScanButtonClickPanel, galleryMenuPanel, filesPanel;
-    [SerializeField] GameObject shopskaGalleryPanel;
+    [SerializeField] GameObject shopskaGalleryPanel, rodopskaGalleryPanel;
     public bool isPhoneOpen = false;
     bool isPhoneOn = false;
     public bool isPhoneScanning = false;
@@ -30,6 +30,7 @@ public class Phone : MonoBehaviour
         phonePanel.SetActive(false);
         galleryMenuPanel.SetActive(false);
         shopskaGalleryPanel.SetActive(false);
+        rodopskaGalleryPanel.SetActive(false);
         filesPanel.SetActive(false);
         
         
@@ -39,10 +40,9 @@ public class Phone : MonoBehaviour
         takePhoto.rawImage.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.B))
+       if (Input.GetKeyDown(KeyCode.B) && isPhoneOn == false)
         {
             PhoneAction();
         }
@@ -135,6 +135,11 @@ public class Phone : MonoBehaviour
     {
         takePhoto.isShopskaGalleryOpen = true;
         shopskaGalleryPanel.SetActive(true);
+    }
+    public void RodopskaGalleryButtonOnClick()
+    {
+        takePhoto.isRodopskaGalleryOpen = true;
+        rodopskaGalleryPanel.SetActive(true);
     }
     public void GalleryPhoneButtonOnClick()
     {

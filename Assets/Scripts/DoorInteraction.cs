@@ -20,7 +20,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
-            if (PhoneScan.isEverythingScanned == true)
+            if (PlayerPrefs.GetInt("EverythingScanned", 0) == 1)
             {
                 if (SceneManager.GetActiveScene().name == "Shopska")
                 {
