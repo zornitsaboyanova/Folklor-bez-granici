@@ -10,13 +10,10 @@ public class FilesManager : MonoBehaviour
     GameObject phonePanel,filesMenuPanel, filePanel, playButton, stopButton, playButtonImage, stopButtonImage, fadeImage, lockImage;
     [SerializeField]
     AudioSource audioSource;
-    PhoneScan phoneScan;
     [SerializeField] GameObject cameraScan;
-    bool isPlaying = false;
     bool canPlay = false;
     void Start()
     {
-        phoneScan = cameraScan.GetComponent<PhoneScan>();
         phonePanel.SetActive(false);
         filesMenuPanel.SetActive(true);
         filePanel.SetActive(true);
@@ -29,7 +26,16 @@ public class FilesManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerPrefs.GetInt("EverythingScanned", 0) == 1 == true)
+
+        if(!audioSource.isPlaying && !playButton.activeSelf)
+        {
+            playButton.SetActive(true);
+            playButtonImage.SetActive(true);
+            stopButton.SetActive(false);
+            stopButtonImage.SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("EverythingScanned", 0) == 1)
         {
             canPlay = true;
         }
@@ -99,13 +105,13 @@ public class FilesManager : MonoBehaviour
             lockImage.SetActive(false);
             canPlay = true;
         }
+
     }
     public void PlayButtonOnCLick()
     {
         if (canPlay)
         {
             audioSource.Play();
-            isPlaying = true;
 
             playButton.SetActive(false);
             playButtonImage.SetActive(false);
@@ -122,7 +128,6 @@ public class FilesManager : MonoBehaviour
         if (canPlay)
         {
             audioSource.Stop();
-            isPlaying = false;
 
             stopButton.SetActive(false);
             stopButtonImage.SetActive(false);

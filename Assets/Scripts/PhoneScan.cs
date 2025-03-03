@@ -22,13 +22,6 @@ public class PhoneScan : MonoBehaviour
     private bool isPlayingShevica = false;
     private bool isPlayingMusicalInstrument = false;
     private bool isPlayingMusicalInstrument1 = false;
-    public bool isNosiaWomanScanned = false;
-    public bool isNosiaManScanned = false;
-    public bool isFoodScanned = false;
-    public bool isShevicaScanned = false;
-    public bool isMusicalInstrumentScanned = false;
-    public bool isMusicalInstrument1Scanned = false;
-    public static bool isEverythingScanned = false;
 
     private const string shopskaNosiaWomanKey = "ShopskaNosiaWomanScanned";
     private const string shopskaNosiaManKey = "ShopskaNosiaManScanned";
@@ -37,13 +30,15 @@ public class PhoneScan : MonoBehaviour
     private const string gydulkaKey = "GydulkaScanned";
     private const string typanKey = "TypanScanned";
 
+    
     private const string rodopskaNosiaWomanKey = "RodopskaNosiaWomanScanned";
     private const string rodopskaNosiaManKey = "RodopskaNosiaManScanned";
     private const string banicaKey = "BanicaScanned";
     private const string rodopskaShevicaKey = "rodopskaShevicaScanned";
     private const string gaidaKey = "GaidaKey";
 
-    private const string everythingKey = "EverythingScanned";
+    private const string everythingShopskaKey = "EverythingShopskaScanned";
+    private const string everythingRodopskaKey = "EverythingRodopskaScanned";
 
     public AudioSource audioSource1, audioSource2, audioSource3, audioSource4, audioSource5, audioSource6;
     private void Start()
@@ -52,10 +47,14 @@ public class PhoneScan : MonoBehaviour
     }
     private void Update()
     {
-        if (isNosiaWomanScanned && isNosiaManScanned && isFoodScanned && isShevicaScanned && isMusicalInstrumentScanned && isMusicalInstrument1Scanned)
+        if (PlayerPrefs.GetInt(shopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(shopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(pitkaKey, 0) == 1 && PlayerPrefs.GetInt(shopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gydulkaKey, 0) == 1 && PlayerPrefs.GetInt(typanKey, 0) == 1)
         {
-            isEverythingScanned = true;
-            PlayerPrefs.SetInt(everythingKey, 1);
+            PlayerPrefs.SetInt(everythingShopskaKey, 1);
+            PlayerPrefs.Save();
+        }
+        else if(PlayerPrefs.GetInt(rodopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(banicaKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gaidaKey, 0) == 1)
+        {
+            PlayerPrefs.SetInt(everythingRodopskaKey, 1);
             PlayerPrefs.Save();
         }
         NosiaWomanScan();
@@ -64,6 +63,7 @@ public class PhoneScan : MonoBehaviour
         ShevicaScan();
         MusicalInstrumentScan();
         MusicalInstrument1Scan();
+
     }
     void NosiaWomanScan()
     {
@@ -81,17 +81,6 @@ public class PhoneScan : MonoBehaviour
                     //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingNosiaWoman = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isNosiaWomanScanned = true;
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(shopskaNosiaWomanKey, 1);
-                        PlayerPrefs.Save();
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Rodopska")
-                    {
-                        PlayerPrefs.SetInt(rodopskaNosiaWomanKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -125,18 +114,6 @@ public class PhoneScan : MonoBehaviour
                     //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingNosiaMan = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isNosiaManScanned = true;
-
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(shopskaNosiaManKey, 1);
-                        PlayerPrefs.Save();
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Rodopska")
-                    {
-                        PlayerPrefs.SetInt(rodopskaNosiaManKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -162,7 +139,7 @@ public class PhoneScan : MonoBehaviour
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
-        {
+        {;
             if (hit.transform == foodObject)
             {
                 if (!isPlayingFood)
@@ -170,18 +147,6 @@ public class PhoneScan : MonoBehaviour
                     //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingFood = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isFoodScanned = true;
-
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(pitkaKey, 1);
-                        PlayerPrefs.Save();
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Rodopska")
-                    {
-                        PlayerPrefs.SetInt(banicaKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -215,18 +180,6 @@ public class PhoneScan : MonoBehaviour
                     //Когато телефонът засече шевица и аудиото не е пуснато - аудиото се пуска
                     isPlayingShevica = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isShevicaScanned = true;
-
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(shopskaShevicaKey, 1);
-                        PlayerPrefs.Save();
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Rodopska")
-                    {
-                        PlayerPrefs.SetInt(rodopskaShevicaKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -258,18 +211,6 @@ public class PhoneScan : MonoBehaviour
                 {
                     isPlayingMusicalInstrument = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isMusicalInstrumentScanned = true;
-
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(gydulkaKey, 1);
-                        PlayerPrefs.Save();
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Rodopska")
-                    {
-                        PlayerPrefs.SetInt(gaidaKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -300,12 +241,6 @@ public class PhoneScan : MonoBehaviour
                 {
                     isPlayingMusicalInstrument1 = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
-                    isMusicalInstrument1Scanned = true;
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        PlayerPrefs.SetInt(typanKey, 1);
-                        PlayerPrefs.Save();
-                    }
                 }
             }
             else
@@ -329,26 +264,99 @@ public class PhoneScan : MonoBehaviour
         if (isPlayingNosiaWoman)
         {
             audioSource1.Play(); //аудиото се пуска
+
+            yield return new WaitWhile(() => audioSource1.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(shopskaNosiaWomanKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Rodopska")
+            {
+                PlayerPrefs.SetInt(rodopskaNosiaWomanKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingNosiaMan)
         {
             audioSource2.Play();
+
+            yield return new WaitWhile(() => audioSource2.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(shopskaNosiaManKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Rodopska")
+            {
+                PlayerPrefs.SetInt(rodopskaNosiaManKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingFood)
         {
             audioSource3.Play();
+
+            yield return new WaitWhile( () => audioSource3.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(pitkaKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Rodopska")
+            {
+                PlayerPrefs.SetInt(banicaKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingShevica)
         {
             audioSource4.Play();
+
+            yield return new WaitWhile(()=> audioSource4.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(shopskaShevicaKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Rodopska")
+            {
+                PlayerPrefs.SetInt(rodopskaShevicaKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingMusicalInstrument)
         {
             audioSource5.Play();
+
+            yield return new WaitWhile(() => audioSource5.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(gydulkaKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Rodopska")
+            {
+                PlayerPrefs.SetInt(gaidaKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingMusicalInstrument1)
         {
             audioSource6.Play();
+
+            yield return new WaitWhile(() => audioSource6.isPlaying);
+
+            if (SceneManager.GetActiveScene().name == "Shopska")
+            {
+                PlayerPrefs.SetInt(typanKey, 1);
+                PlayerPrefs.Save();
+            }
         }
     }
 }

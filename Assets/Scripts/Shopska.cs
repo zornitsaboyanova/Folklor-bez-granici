@@ -5,19 +5,19 @@ using UnityEngine;
 public class Shopska : MonoBehaviour
 {
     [SerializeField]
-    GameObject shopska, shopska1, shopska2, rodopska, shopska3;
+    GameObject shopska, shopska1, shopska2, shopska3, rodopska;
     public bool canPress;
 
     void Start()
     {
         shopska1.SetActive(false);
         shopska3.SetActive(false);
-        if (DoorInteraction.isShopskaDone == false)
+        if (PlayerPrefs.GetInt("ShopskaDone", 0) == 0)
         {
             shopska.SetActive(true);
             shopska2.SetActive(false);
         }
-        else if (DoorInteraction.isShopskaDone == true)
+        else if (PlayerPrefs.GetInt("ShopskaDone", 0) == 1)
         {
             shopska.SetActive(false);
             shopska2.SetActive(true);
@@ -27,11 +27,11 @@ public class Shopska : MonoBehaviour
     {
         if (canPress == true)
         {
-            if(DoorInteraction.isShopskaDone == false)
+            if(PlayerPrefs.GetInt("ShopskaDone", 0) == 0)
             {
                 shopska1.SetActive(true);
             }
-            else if(DoorInteraction.isShopskaDone == true)
+            else if(PlayerPrefs.GetInt("ShopskaDone", 0) == 1)
             {
                 Debug.Log("Mouse is over");
                 rodopska.SetActive(false);
@@ -43,11 +43,11 @@ public class Shopska : MonoBehaviour
     {
         if(canPress == true)
         {
-            if (DoorInteraction.isShopskaDone == false)
+            if (PlayerPrefs.GetInt("ShopskaDone", 0) == 0)
             {
                 shopska1.SetActive(false);
             }
-            else if (DoorInteraction.isShopskaDone == true)
+            else if (PlayerPrefs.GetInt("ShopskaDone", 0) == 1)
             {
                 rodopska.SetActive(true);
                 shopska3.SetActive(false);
@@ -58,13 +58,13 @@ public class Shopska : MonoBehaviour
     {
         if(canPress == true)
         {
-            if (DoorInteraction.isShopskaDone == false)
+            if (PlayerPrefs.GetInt("ShopskaDone", 0) == 0)
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Shopska");
             }
-            else if (DoorInteraction.isShopskaDone == true)
+            else if (PlayerPrefs.GetInt("ShopskaDone", 0) == 1)
             {
-                PhoneScan.isEverythingScanned = true;
+                //PhoneScan.isEverythingShopskaScanned = true;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Shopska");
             }
         }

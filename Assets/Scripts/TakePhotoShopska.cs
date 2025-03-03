@@ -5,27 +5,27 @@ using UnityEngine.UI;
 using System.IO;
 using System.Diagnostics.Tracing;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class TakePhoto : MonoBehaviour
+public class TakePhotoShopska : MonoBehaviour
 {
     public GameObject rawImage;
-    public Camera phoneCamera;         // Assign the in-game camera
-    public RenderTexture renderTexture; // Assign the phone screen RenderTexture
-    //public Image galleryImage;         // Assign the UI Image in the Gallery Panel
-    public GameObject galleryMenuPanel;   // Reference to the gallery panel
+    public Camera phoneCamera;
+    public RenderTexture renderTexture;
+    public GameObject galleryMenuPanel, shopskaGalleryPanel;
     public GameObject cameraScanPanel;
     public GameObject phonePanel;
 
     public bool isGalleryOpen = false;
+    public bool isShopskaGalleryOpen = false;
 
     public GameObject phoneGameObject;
     Phone phone;
 
     public GameObject imageSlotPrefab;
     public Transform galleryGrid;
-    private List<string> savedPhotoPaths = new List<string>();
-    private const string PhotosKey = "SavedPhotos"; // Key for PlayerPrefs
-
+    private List<string> savedPhotoPathsShopska = new List<string>();
+    private const string shopskaPhotosKey = "SavedShopskaPhotos";
     private void Start()
     {
         phone = phoneGameObject.GetComponent<Phone>();
@@ -37,26 +37,30 @@ public class TakePhoto : MonoBehaviour
     }
     public void PhoneButtonClick()
     {
-        if (isGalleryOpen)
+        if (isShopskaGalleryOpen)
         {
             phone.canTakeAPhoto = true;
             galleryMenuPanel.SetActive(false);
+            shopskaGalleryPanel.SetActive(false);
             phonePanel.SetActive(false);
             cameraScanPanel.SetActive(true);
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             isGalleryOpen = false;
+            isShopskaGalleryOpen = false;
             phone.isPhoneScanning = true;
             GL.Clear(true, true, Color.black);
             rawImage.SetActive(false);
 
         }
-        else if (phone.isGalleryOpen)
+        else if (phone.isShopskaGalleryOpen)
         {
-            galleryMenuPanel.SetActive(false);
-            phonePanel.SetActive(true);
-            phone.isGalleryOpen = false;
+            phonePanel.SetActive(false);
+            galleryMenuPanel.SetActive(true);
+            shopskaGalleryPanel.SetActive(false);
+            phone.isShopskaGalleryOpen = false;
+            isGalleryOpen = true;
         }
     }
 
@@ -88,8 +92,8 @@ public class TakePhoto : MonoBehaviour
         File.WriteAllBytes(filePath, bytes);
         //Debug.Log("Photo saved at: " + filePath);
 
-        savedPhotoPaths.Add(filePath);
-        SavePhotoPaths();
+        savedPhotoPathsShopska.Add(filePath);
+        SavePhotoPathsShopska();
 
         OpenGallery();
 
@@ -99,11 +103,11 @@ public class TakePhoto : MonoBehaviour
     }
     void OpenGallery()
     {
-        if (galleryMenuPanel != null)
+        if (shopskaGalleryPanel != null)
         {
             phone.canTakeAPhoto = false;
-            galleryMenuPanel.SetActive(true);
-            isGalleryOpen = true;
+            shopskaGalleryPanel.SetActive(true);
+            isShopskaGalleryOpen = true;
             cameraScanPanel.SetActive(false);
             Time.timeScale = 0.0f;
         }
@@ -118,12 +122,13 @@ public class TakePhoto : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        LoadPhotoPaths();
+        LoadPhotoPathsShopska();
 
-        foreach (string filePath in savedPhotoPaths)
+        foreach (string filePath in savedPhotoPathsShopska)
         {
             StartCoroutine(LoadPhoto(filePath));
         }
+
     }
 
     private IEnumerator LoadPhoto(string filePath)
@@ -140,24 +145,25 @@ public class TakePhoto : MonoBehaviour
         yield return null;
     }
 
-    private void SavePhotoPaths()
+    private void SavePhotoPathsShopska()
     {
-        string pathsString = string.Join("|", savedPhotoPaths);
-        PlayerPrefs.SetString(PhotosKey, pathsString);
+        string pathsString = string.Join("|", savedPhotoPathsShopska);
+        PlayerPrefs.SetString(shopskaPhotosKey, pathsString);
         PlayerPrefs.Save();
     }
 
-    private void LoadPhotoPaths()
+    private void LoadPhotoPathsShopska()
     {
-        savedPhotoPaths.Clear();
+        savedPhotoPathsShopska.Clear();
 
-        if (PlayerPrefs.HasKey(PhotosKey))
+        if (PlayerPrefs.HasKey(shopskaPhotosKey))
         {
-            string pathsString = PlayerPrefs.GetString(PhotosKey);
+            string pathsString = PlayerPrefs.GetString(shopskaPhotosKey);
             if (!string.IsNullOrEmpty(pathsString))
             {
-                savedPhotoPaths.AddRange(pathsString.Split('|'));
+                savedPhotoPathsShopska.AddRange(pathsString.Split('|'));
             }
         }
     }
+    
 }

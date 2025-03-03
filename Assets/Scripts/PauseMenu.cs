@@ -30,9 +30,17 @@ public class PauseMenu : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && phone.isPhoneOpen == false)
+        if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 1)
         {
             pauseMenuCanvas.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 0)
+        {
+            pauseMenuCanvas.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && phone.isPhoneOpen == false)
+        {
             PauseGame(); //Играта се паузира, ако е натиснат esc бутона, а ако вече това е така, играта продължава с натискането на еsc бутона
         }
     }
