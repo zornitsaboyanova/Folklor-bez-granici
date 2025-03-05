@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class Phone : MonoBehaviour
 {
     [SerializeField]
-    GameObject phoneOffPanel, phonePanel, cameraScanPanel, pauseMenuCanvas, cameraScanButtonClickPanel, galleryMenuPanel, filesPanel;
+    public GameObject phoneOffPanel, phonePanel, cameraScanPanel, pauseMenuCanvas, cameraScanButtonClickPanel, galleryMenuPanel, filesPanel;
     [SerializeField] GameObject shopskaGalleryPanel, rodopskaGalleryPanel;
     public bool isPhoneOpen = false;
     public bool isPhoneOn = false;
@@ -23,6 +23,7 @@ public class Phone : MonoBehaviour
 
     TakePhotoShopska takePhotoShopska;
     TakePhotoRodopska takePhotoRodopska;
+
     void Start()
     {
         takePhotoShopska = shopskaGalleryPanel.GetComponent<TakePhotoShopska>();

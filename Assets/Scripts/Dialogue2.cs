@@ -18,6 +18,7 @@ public class Dialogue2 : MonoBehaviour
     public GameObject player;
     PlayerMotor playerMotor;
     PlayerLook playerLook;
+
     private const string dialogueKey = "Dialogue2Shown";
     void Start()
     {
@@ -33,8 +34,7 @@ public class Dialogue2 : MonoBehaviour
             //playerLook.canLook = true;
             return;
         }
-        PlayerPrefs.SetInt(dialogueKey, 1); // Записваме, че вече е стартирал
-        PlayerPrefs.Save();
+        
 
         playerMotor = player.GetComponent<PlayerMotor>();
         playerLook = player.GetComponent<PlayerLook>();
@@ -101,6 +101,8 @@ public class Dialogue2 : MonoBehaviour
         else
         {
             dialogueBox.SetActive(false);
+            PlayerPrefs.SetInt(dialogueKey, 1);
+            PlayerPrefs.Save();
 
             playerMotor.canMove = true;
             playerLook.canLook = true;

@@ -18,6 +18,7 @@ public class TakePhotoShopska : MonoBehaviour
 
     public bool isGalleryOpen = false;
     public bool isShopskaGalleryOpen = false;
+    public bool isButtonClicked = false;
 
     public GameObject phoneGameObject;
     Phone phone;
@@ -52,7 +53,7 @@ public class TakePhotoShopska : MonoBehaviour
             phone.isPhoneScanning = true;
             GL.Clear(true, true, Color.black);
             rawImage.SetActive(false);
-
+            isButtonClicked = true;
         }
         else if (phone.isShopskaGalleryOpen)
         {

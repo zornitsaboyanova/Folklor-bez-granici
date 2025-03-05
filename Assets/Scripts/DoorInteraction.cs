@@ -59,8 +59,13 @@ public class DoorInteraction : MonoBehaviour
                     Cursor.visible = true;
                     PlayerPrefs.SetInt(rodopskaDoneKey, 1);
                     PlayerPrefs.Save();
-                    //Rodopska.isActive = true;
+                    Rodopska.isActive = true;
                     SceneManager.LoadScene("Map");
+                }
+                else
+                {
+                    interactionUI.SetActive(false);
+                    interactionUI1.SetActive(true);
                 }
             }
         }

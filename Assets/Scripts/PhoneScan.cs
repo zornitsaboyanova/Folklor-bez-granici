@@ -34,8 +34,8 @@ public class PhoneScan : MonoBehaviour
     private const string rodopskaNosiaWomanKey = "RodopskaNosiaWomanScanned";
     private const string rodopskaNosiaManKey = "RodopskaNosiaManScanned";
     private const string banicaKey = "BanicaScanned";
-    private const string rodopskaShevicaKey = "rodopskaShevicaScanned";
-    private const string gaidaKey = "GaidaKey";
+    private const string rodopskaShevicaKey = "RodopskaShevicaScanned";
+    private const string gaidaKey = "GaidaScanned";
 
     private const string everythingShopskaKey = "EverythingShopskaScanned";
     private const string everythingRodopskaKey = "EverythingRodopskaScanned";
@@ -52,8 +52,9 @@ public class PhoneScan : MonoBehaviour
             PlayerPrefs.SetInt(everythingShopskaKey, 1);
             PlayerPrefs.Save();
         }
-        else if(PlayerPrefs.GetInt(rodopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(banicaKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gaidaKey, 0) == 1)
+        if(PlayerPrefs.GetInt(rodopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(banicaKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gaidaKey, 0) == 1)
         {
+            Debug.Log("This line is called");
             PlayerPrefs.SetInt(everythingRodopskaKey, 1);
             PlayerPrefs.Save();
         }
@@ -229,29 +230,32 @@ public class PhoneScan : MonoBehaviour
     }
     void MusicalInstrument1Scan()
     {
-        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
+        if(SceneManager.GetActiveScene().name == "Shopska")
         {
-            if (hit.transform == musicalInstrumentObject1)
+            Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
             {
-                if (!isPlayingMusicalInstrument1)
+                if (hit.transform == musicalInstrumentObject1)
                 {
-                    isPlayingMusicalInstrument1 = true;
-                    detectionCoroutine = StartCoroutine(DelaySound());
-                }
-            }
-            else
-            {
-                if (isPlayingMusicalInstrument1)
-                {
-                    isPlayingMusicalInstrument1 = false;
-                    audioSource6.Stop();
-                    if (detectionCoroutine != null)
+                    if (!isPlayingMusicalInstrument1)
                     {
-                        StartCoroutine(DelaySound());
+                        isPlayingMusicalInstrument1 = true;
+                        detectionCoroutine = StartCoroutine(DelaySound());
+                    }
+                }
+                else
+                {
+                    if (isPlayingMusicalInstrument1)
+                    {
+                        isPlayingMusicalInstrument1 = false;
+                        audioSource6.Stop();
+                        if (detectionCoroutine != null)
+                        {
+                            StartCoroutine(DelaySound());
+                        }
                     }
                 }
             }
