@@ -11,10 +11,11 @@ public class DoorInteraction : MonoBehaviour
     Phone phone;
 
     public GameObject interactionUI, interactionUI1;
-    private bool isPlayerNear = false;
+    public bool isPlayerNear = false;
 
     private const string shopskaDoneKey = "ShopskaDone";
     private const string rodopskaDoneKey = "RodopskaDone";
+    private const string pirinskaDoneKey = "PirinskaDone";
 
     void Start()
     {
@@ -32,15 +33,11 @@ public class DoorInteraction : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("EverythingShopskaScanned", 0) == 1)
                 {
-                    if (SceneManager.GetActiveScene().name == "Shopska")
-                    {
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = true;
-                        PlayerPrefs.SetInt(shopskaDoneKey, 1);
-                        PlayerPrefs.Save();
-                        Rodopska.isActive = true;
-                        SceneManager.LoadScene("Map");
-                    }
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    PlayerPrefs.SetInt(shopskaDoneKey, 1);
+                    PlayerPrefs.Save();
+                    SceneManager.LoadScene("Map");
                 }
                 else
                 {
@@ -59,7 +56,26 @@ public class DoorInteraction : MonoBehaviour
                     Cursor.visible = true;
                     PlayerPrefs.SetInt(rodopskaDoneKey, 1);
                     PlayerPrefs.Save();
-                    Rodopska.isActive = true;
+                    //Pirinska.isActive = true;
+                    SceneManager.LoadScene("Map");
+                }
+                else
+                {
+                    interactionUI.SetActive(false);
+                    interactionUI1.SetActive(true);
+                }
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "Pirinska")
+        {
+            if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+            {
+                if (PlayerPrefs.GetInt("EverythingPirinskaScanned", 0) == 1)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    PlayerPrefs.SetInt(pirinskaDoneKey, 1);
+                    PlayerPrefs.Save();
                     SceneManager.LoadScene("Map");
                 }
                 else

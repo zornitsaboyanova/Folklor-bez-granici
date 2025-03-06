@@ -12,7 +12,7 @@ public class Phone : MonoBehaviour
 {
     [SerializeField]
     public GameObject phoneOffPanel, phonePanel, cameraScanPanel, pauseMenuCanvas, cameraScanButtonClickPanel, galleryMenuPanel, filesPanel;
-    [SerializeField] GameObject shopskaGalleryPanel, rodopskaGalleryPanel;
+    [SerializeField] GameObject shopskaGalleryPanel, rodopskaGalleryPanel, pirinskaGalleryPanel;
     public bool isPhoneOpen = false;
     public bool isPhoneOn = false;
     public bool isPhoneScanning = false;
@@ -20,14 +20,17 @@ public class Phone : MonoBehaviour
     public bool canTakeAPhoto = false;
     public bool isShopskaGalleryOpen = false;
     public bool isRodopskaGalleryOpen = false;
+    public bool isPirinskaGalleryOpen = false;
 
     TakePhotoShopska takePhotoShopska;
     TakePhotoRodopska takePhotoRodopska;
+    TakePhotoPirinska takePhotoPirinska;
 
     void Start()
     {
         takePhotoShopska = shopskaGalleryPanel.GetComponent<TakePhotoShopska>();
         takePhotoRodopska = rodopskaGalleryPanel.GetComponent<TakePhotoRodopska>();
+        takePhotoPirinska = pirinskaGalleryPanel.GetComponent<TakePhotoPirinska>();
 
         phoneOffPanel.SetActive(false);
         cameraScanPanel.SetActive(false);
@@ -36,6 +39,7 @@ public class Phone : MonoBehaviour
         galleryMenuPanel.SetActive(false);
         shopskaGalleryPanel.SetActive(false);
         rodopskaGalleryPanel.SetActive(false);
+        pirinskaGalleryPanel.SetActive(false);
         filesPanel.SetActive(false);
         
         
@@ -79,6 +83,17 @@ public class Phone : MonoBehaviour
                 Cursor.lockState= CursorLockMode.None;
                 Cursor.visible = true;
                 takePhotoRodopska.TakeAPhoto();
+            }
+            else if(SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                Debug.Log("Pirinska Scene");
+                galleryMenuPanel.SetActive(true);
+                pirinskaGalleryPanel.SetActive(true);
+                takePhotoPirinska.isGalleryOpen = true;
+                takePhotoPirinska.isPirinskaGalleryOpen = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                takePhotoPirinska.TakeAPhoto();
             }
             
         }
@@ -163,6 +178,11 @@ public class Phone : MonoBehaviour
     {
         isRodopskaGalleryOpen = true;
         rodopskaGalleryPanel.SetActive(true);
+    }
+    public void PirinskaGalleryButtonOnClick()
+    {
+        isPirinskaGalleryOpen = true;
+        pirinskaGalleryPanel.SetActive(true);
     }
     public void GalleryPhoneButtonOnClick()
     {

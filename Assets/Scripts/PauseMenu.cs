@@ -30,11 +30,11 @@ public class PauseMenu : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 1)
+        if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 1 || PlayerPrefs.GetInt("Dialogue3Shown", 0) == 1)
         {
             pauseMenuCanvas.SetActive(true);
         }
-        else if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 0)
+        else if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 0 || PlayerPrefs.GetInt("Dialogue3Shown", 0) == 0)
         {
             pauseMenuCanvas.SetActive(false);
         }

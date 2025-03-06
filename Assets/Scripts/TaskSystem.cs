@@ -14,13 +14,18 @@ public class TaskSystem : MonoBehaviour
     [SerializeField] GameObject task8Panel, task8Done;
     [SerializeField] GameObject task9Panel, task9Done;
     [SerializeField] GameObject task10Panel, task10Done;
+    [SerializeField] GameObject task11Panel, task11Done;
+    [SerializeField] GameObject task12Panel, task12Done;
 
     public GameObject phoneCanvas;
     public GameObject cameraScanPanel;
     public GameObject shopskaGalleryPanel;
+    public GameObject door;
+    [SerializeField] GameObject dialogue3Canvas;
 
     TakePhotoShopska takePhotoShopska;
     Phone phone;
+    DoorInteraction doorInteraction;
 
     private const string task1Key = "Task1DoneShopska";
     private const string task2Key = "Task2DoneShopska";
@@ -32,11 +37,16 @@ public class TaskSystem : MonoBehaviour
     private const string task8Key = "Task8DoneShopska";
     private const string task9Key = "Task9DoneShopska";
     private const string task10Key = "Task10DoneShopska";
+    private const string task11Key = "Task11DoneShopska";
+    private const string task12Key = "Task12DoneShopska";
     private const string tasksDoneKey = "TasksDoneKeyShopska";
     private void Start()
     {
         phone = phoneCanvas.GetComponent<Phone>();
         takePhotoShopska = shopskaGalleryPanel.GetComponent<TakePhotoShopska>();
+        doorInteraction = door.GetComponent<DoorInteraction>();
+
+        dialogue3Canvas.SetActive(false);
 
         task1Panel.SetActive(false);
         task1Done.SetActive(false);
@@ -58,6 +68,11 @@ public class TaskSystem : MonoBehaviour
         task9Done.SetActive(false);
         task10Panel.SetActive(false);
         task10Done.SetActive(false);
+        task11Panel.SetActive(false);
+        task11Done.SetActive(false);
+        task12Panel.SetActive(false);
+        task12Done.SetActive(false);
+
     }
     private void Update()
     {
@@ -79,9 +94,11 @@ public class TaskSystem : MonoBehaviour
         }
         if (PlayerPrefs.GetInt(task2Key, 0) == 1 && PlayerPrefs.GetInt(task3Key, 0) == 0)
         {
-            StartCoroutine(WaitForTheNextTask());
             task1Panel.SetActive(false);
             task2Panel.SetActive(false);
+
+            StartCoroutine(WaitForTheNextTask());
+            
             task3Panel.SetActive(true);
             task3Done.SetActive(false);
 
@@ -97,9 +114,11 @@ public class TaskSystem : MonoBehaviour
         }
         if(PlayerPrefs.GetInt(task4Key, 0) == 1 && PlayerPrefs.GetInt(task5Key, 0) == 0)
         {
-            StartCoroutine(WaitForTheNextTask());
             task3Panel.SetActive(false);
             task4Panel.SetActive(false);
+
+            StartCoroutine(WaitForTheNextTask());
+            
             task5Panel.SetActive(true);
             task5Done.SetActive(false);
 
@@ -115,9 +134,11 @@ public class TaskSystem : MonoBehaviour
         }
         if (PlayerPrefs.GetInt(task6Key, 0) == 1 && PlayerPrefs.GetInt(task7Key, 0) == 0)
         {
-            StartCoroutine(WaitForTheNextTask());
             task5Panel.SetActive(false);
             task6Panel.SetActive(false);
+
+            StartCoroutine(WaitForTheNextTask());
+            
             task7Panel.SetActive(true);
             task7Done.SetActive(false);
 
@@ -133,9 +154,11 @@ public class TaskSystem : MonoBehaviour
         }
         if (PlayerPrefs.GetInt(task8Key, 0) == 1 && PlayerPrefs.GetInt(task9Key, 0) == 0)
         {
-            StartCoroutine(WaitForTheNextTask());
             task7Panel.SetActive(false);
             task8Panel.SetActive(false);
+
+            StartCoroutine(WaitForTheNextTask());
+            
             task9Panel.SetActive(true);
             task9Done.SetActive(false);
 
@@ -148,6 +171,31 @@ public class TaskSystem : MonoBehaviour
             task10Done.SetActive(false);
 
             Task10();
+        }
+        if (PlayerPrefs.GetInt(task10Key, 0) == 1 && PlayerPrefs.GetInt(task11Key, 0) == 0)
+        {
+            task9Panel.SetActive(false);
+            task10Panel.SetActive(false);
+
+            dialogue3Canvas.SetActive(true);
+
+            if(PlayerPrefs.GetInt("Dialogue3Shown", 0) == 1)
+            {
+                StartCoroutine(WaitForTheNextTask());
+
+                task11Panel.SetActive(true);
+                task11Done.SetActive(false);
+
+                Task11();
+            }
+        }
+        if (PlayerPrefs.GetInt(task11Key, 0) == 1 && PlayerPrefs.GetInt(task12Key, 0) == 0)
+        {
+            StartCoroutine(WaitForTheNextTask());
+            task12Panel.SetActive(true);
+            task12Done.SetActive(false);
+
+            Task12();
         }
     }
     IEnumerator WaitForTheNextTask()
@@ -287,11 +335,37 @@ public class TaskSystem : MonoBehaviour
             task10Done.SetActive(true);
             PlayerPrefs.SetInt(task10Key, 1);
             PlayerPrefs.Save();
-            StartCoroutine(WaitForTheNextTask());
-            task9Panel.SetActive(false);
-            task10Panel.SetActive(false);
-            PlayerPrefs.SetInt(tasksDoneKey, 1);
+        }
+        if (PlayerPrefs.GetInt(task10Key, 0) == 1)
+        {
+            task10Panel.SetActive(true);
+            task10Done.SetActive(true);
+        }
+    }
+    void Task11()
+    {
+        if(PlayerPrefs.GetInt("EverythingShopskaScanned", 0) == 1)
+        {
+            task11Done.SetActive(true);
+            PlayerPrefs.SetInt(task11Key, 1);
             PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetInt(task11Key, 0) == 1)
+        {
+            task11Panel.SetActive(true);
+            task11Done.SetActive(true);
+        }
+    }
+    void Task12()
+    {
+        if(doorInteraction.isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        {
+            task12Done.SetActive(true);
+            PlayerPrefs.SetInt(task12Key, 1);
+            PlayerPrefs.Save();
+            StartCoroutine(WaitForTheNextTask());
+            task11Panel.SetActive(false);
+            task12Panel.SetActive(true);
         }
     }
 }
