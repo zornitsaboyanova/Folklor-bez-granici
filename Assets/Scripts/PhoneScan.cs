@@ -25,7 +25,7 @@ public class PhoneScan : MonoBehaviour
 
     private const string shopskaNosiaWomanKey = "ShopskaNosiaWomanScanned";
     private const string shopskaNosiaManKey = "ShopskaNosiaManScanned";
-    private const string pitkaKey = "PitkaScanned";
+    private const string shopskaPitkaKey = "PitkaScanned";
     private const string shopskaShevicaKey = "ShopskaShevicaScanned";
     private const string gydulkaKey = "GydulkaScanned";
     private const string typanKey = "TypanScanned";
@@ -37,8 +37,15 @@ public class PhoneScan : MonoBehaviour
     private const string rodopskaShevicaKey = "RodopskaShevicaScanned";
     private const string gaidaKey = "GaidaScanned";
 
+    private const string pirinskaNosiaWomanKey = "PirinskaNosiaWomanScanned";
+    private const string pirinskaNosiaManKey = "PirinskaNosiaManScanned";
+    private const string pirinskaPitkaKey = "PirinskaPitkaScanned";
+    private const string pirinskaShevicaKey = "PirinskaShevicaScanned";
+    private const string tamburaKey = "TamburaScanned";
+
     private const string everythingShopskaKey = "EverythingShopskaScanned";
     private const string everythingRodopskaKey = "EverythingRodopskaScanned";
+    private const string everythingPirinskaKey = "EverythingPirinskaScanned";
 
     public AudioSource audioSource1, audioSource2, audioSource3, audioSource4, audioSource5, audioSource6;
     private void Start()
@@ -47,15 +54,19 @@ public class PhoneScan : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerPrefs.GetInt(shopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(shopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(pitkaKey, 0) == 1 && PlayerPrefs.GetInt(shopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gydulkaKey, 0) == 1 && PlayerPrefs.GetInt(typanKey, 0) == 1)
+        if (PlayerPrefs.GetInt(shopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(shopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(shopskaPitkaKey, 0) == 1 && PlayerPrefs.GetInt(shopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gydulkaKey, 0) == 1 && PlayerPrefs.GetInt(typanKey, 0) == 1)
         {
             PlayerPrefs.SetInt(everythingShopskaKey, 1);
             PlayerPrefs.Save();
         }
         if(PlayerPrefs.GetInt(rodopskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(banicaKey, 0) == 1 && PlayerPrefs.GetInt(rodopskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(gaidaKey, 0) == 1)
         {
-            Debug.Log("This line is called");
             PlayerPrefs.SetInt(everythingRodopskaKey, 1);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetInt(pirinskaNosiaWomanKey, 0) == 1 && PlayerPrefs.GetInt(pirinskaNosiaManKey, 0) == 1 && PlayerPrefs.GetInt(pirinskaPitkaKey, 0) == 1 && PlayerPrefs.GetInt(pirinskaShevicaKey, 0) == 1 && PlayerPrefs.GetInt(tamburaKey, 0) == 1)
+        {
+            PlayerPrefs.SetInt(everythingPirinskaKey, 1);
             PlayerPrefs.Save();
         }
         NosiaWomanScan();
@@ -281,6 +292,11 @@ public class PhoneScan : MonoBehaviour
                 PlayerPrefs.SetInt(rodopskaNosiaWomanKey, 1);
                 PlayerPrefs.Save();
             }
+            else if (SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                PlayerPrefs.SetInt(pirinskaNosiaWomanKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingNosiaMan)
         {
@@ -298,6 +314,11 @@ public class PhoneScan : MonoBehaviour
                 PlayerPrefs.SetInt(rodopskaNosiaManKey, 1);
                 PlayerPrefs.Save();
             }
+            else if (SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                PlayerPrefs.SetInt(pirinskaNosiaManKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingFood)
         {
@@ -307,12 +328,17 @@ public class PhoneScan : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
-                PlayerPrefs.SetInt(pitkaKey, 1);
+                PlayerPrefs.SetInt(shopskaPitkaKey, 1);
                 PlayerPrefs.Save();
             }
             else if (SceneManager.GetActiveScene().name == "Rodopska")
             {
                 PlayerPrefs.SetInt(banicaKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                PlayerPrefs.SetInt(pirinskaPitkaKey, 1);
                 PlayerPrefs.Save();
             }
         }
@@ -332,6 +358,11 @@ public class PhoneScan : MonoBehaviour
                 PlayerPrefs.SetInt(rodopskaShevicaKey, 1);
                 PlayerPrefs.Save();
             }
+            else if (SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                PlayerPrefs.SetInt(pirinskaShevicaKey, 1);
+                PlayerPrefs.Save();
+            }
         }
         else if (isPlayingMusicalInstrument)
         {
@@ -347,6 +378,11 @@ public class PhoneScan : MonoBehaviour
             else if (SceneManager.GetActiveScene().name == "Rodopska")
             {
                 PlayerPrefs.SetInt(gaidaKey, 1);
+                PlayerPrefs.Save();
+            }
+            else if (SceneManager.GetActiveScene().name == "Pirinska")
+            {
+                PlayerPrefs.SetInt(tamburaKey, 1);
                 PlayerPrefs.Save();
             }
         }

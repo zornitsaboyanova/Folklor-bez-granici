@@ -13,6 +13,8 @@ public class Dialogue3 : MonoBehaviour
 
     [SerializeField] GameObject dialogueBox;
 
+    public GameObject pauseMenuCanvas;
+
     public GameObject player;
     PlayerMotor playerMotor;
     PlayerLook playerLook;
@@ -21,9 +23,10 @@ public class Dialogue3 : MonoBehaviour
 
     private void Start()
     {
-
+        pauseMenuCanvas.SetActive(false);
         if (PlayerPrefs.GetInt(dialogueKey, 0) == 1)
         {
+            pauseMenuCanvas.SetActive(true);
             dialogueBox.SetActive(false); // Скриваме диалога и приключваме
             //playerMotor.canMove = true;
             //playerLook.canLook = true;

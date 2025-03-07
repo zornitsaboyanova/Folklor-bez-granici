@@ -14,6 +14,7 @@ public class Dialogue2 : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject pauseMenuCanvas;
 
     public GameObject player;
     PlayerMotor playerMotor;
@@ -22,13 +23,14 @@ public class Dialogue2 : MonoBehaviour
     private const string dialogueKey = "Dialogue2Shown";
     void Start()
     {
-
+        pauseMenuCanvas.SetActive(false);
         //PlayerPrefs.DeleteKey("Dialogue2Shown");
         //PlayerPrefs.Save();
 
 
         if (PlayerPrefs.GetInt(dialogueKey, 0) == 1)
         {
+            pauseMenuCanvas.SetActive(true);
             dialogueBox.SetActive(false); // Скриваме диалога и приключваме
             //playerMotor.canMove = true;
             //playerLook.canLook = true;

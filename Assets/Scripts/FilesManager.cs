@@ -11,7 +11,6 @@ public class FilesManager : MonoBehaviour
     [SerializeField]
     AudioSource audioSource;
     [SerializeField] GameObject cameraScan;
-    bool canPlay = false;
 
     void Start()
     {
@@ -35,82 +34,92 @@ public class FilesManager : MonoBehaviour
             stopButton.SetActive(false);
             stopButtonImage.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("EverythingScanned", 0) == 1)
-        {
-            canPlay = true;
-        }
 
         if (PlayerPrefs.GetInt("ShopskaNosiaWomanScanned", 0) == 1 && this.gameObject.name == "File1_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("ShopskaNosiaManScanned", 0) == 1 && this.gameObject.name == "File2_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("PitkaScanned", 0) == 1 && this.gameObject.name == "File3_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("ShopskaShevicaScanned", 0) == 1 && this.gameObject.name == "File4_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("GydulkaScanned", 0) == 1 && this.gameObject.name == "File5_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("TypanScanned", 0) == 1 && this.gameObject.name == "File6_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         if (PlayerPrefs.GetInt("RodopskaNosiaWomanScanned", 0) == 1 && this.gameObject.name == "File7_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("RodopskaNosiaManScanned", 0) == 1 && this.gameObject.name == "File8_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("BanicaScanned", 0) == 1 && this.gameObject.name == "File9_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("RodopskaShevicaScanned", 0) == 1 && this.gameObject.name == "File10_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
         }
         else if (PlayerPrefs.GetInt("GaidaScanned", 0) == 1 && this.gameObject.name == "File11_panel")
         {
             fadeImage.SetActive(false);
             lockImage.SetActive(false);
-            canPlay = true;
+        }
+        if (PlayerPrefs.GetInt("PirinskaNosiaWomanScanned", 0) == 1 && this.gameObject.name == "File12_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("PirinskaNosiaManScanned", 0) == 1 && this.gameObject.name == "File13_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("PirinskaPitkaScanned", 0) == 1 && this.gameObject.name == "File14_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("PirinskaShevicaScanned", 0) == 1 && this.gameObject.name == "File15_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("TamburaScanned", 0) == 1 && this.gameObject.name == "File16_panel")
+        {
+            fadeImage.SetActive(false);
+            lockImage.SetActive(false);
         }
 
     }
     public void PlayButtonOnCLick()
     {
-        if (canPlay)
+        if (fadeImage.activeSelf == false)
         {
             audioSource.Play();
 
@@ -125,7 +134,7 @@ public class FilesManager : MonoBehaviour
     }
     public void StopButtonOnClick()
     {
-        if (canPlay)
+        if (fadeImage.activeSelf == false)
         {
             audioSource.Stop();
 

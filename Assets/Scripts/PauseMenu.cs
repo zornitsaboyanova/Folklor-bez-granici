@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    public GameObject pauseMenuCanvas, pauseMenu, backToMainMenu, exit;
+    public GameObject pauseMenu, backToMainMenu, exit;
 
     [SerializeField] GameObject phoneCanvas;
     Phone phone;
@@ -22,7 +22,6 @@ public class PauseMenu : MonoBehaviour
     {
         phone = phoneCanvas.GetComponent<Phone>();
 
-        pauseMenuCanvas.SetActive(false);
         pauseMenu.SetActive(false);
         pauseMenu.SetActive(false);
         backToMainMenu.SetActive(false);
@@ -30,16 +29,7 @@ public class PauseMenu : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 1 || PlayerPrefs.GetInt("Dialogue3Shown", 0) == 1)
-        {
-            pauseMenuCanvas.SetActive(true);
-        }
-        else if (PlayerPrefs.GetInt("Dialogue2Shown", 0) == 0 || PlayerPrefs.GetInt("Dialogue3Shown", 0) == 0)
-        {
-            pauseMenuCanvas.SetActive(false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && phone.isPhoneOpen == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && phone.isPhoneOn == false)
         {
             PauseGame(); //Играта се паузира, ако е натиснат esc бутона, а ако вече това е така, играта продължава с натискането на еsc бутона
         }
