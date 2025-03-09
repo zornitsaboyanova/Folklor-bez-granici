@@ -1,35 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class Dialogue3 : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
+    public AudioClip[] audioClips;
     public float textSpeed;
 
     private int index;
 
+    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject dialogueBox;
-
-    public GameObject pauseMenuCanvas;
+    [SerializeField] GameObject pauseMenuCanvas;
 
     public GameObject player;
     PlayerMotor playerMotor;
     PlayerLook playerLook;
 
     private const string dialogueKey = "Dialogue3Shown";
-
-    private void Start()
+    void Start()
     {
         pauseMenuCanvas.SetActive(false);
+
+
         if (PlayerPrefs.GetInt(dialogueKey, 0) == 1)
         {
             pauseMenuCanvas.SetActive(true);
-            dialogueBox.SetActive(false); // Скриваме диалога и приключваме
-            //playerMotor.canMove = true;
-            //playerLook.canLook = true;
+            dialogueBox.SetActive(false); 
             return;
         }
 
@@ -46,6 +46,8 @@ public class Dialogue3 : MonoBehaviour
         textComponent.text = string.Empty;
         StartDialogue();
     }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -58,12 +60,21 @@ public class Dialogue3 : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
+                if (audioClips.Length > index && audioClips[index] != null)
+                {
+                    audioSource.Stop();
+                    //audioSource.PlayOneShot(audioClips[index]);
+                }
             }
         }
     }
+
     void StartDialogue()
     {
         index = 0;
+        //playerLook.canLook = false;
+        //playerMotor.canMove = false;
+        PlayAudioClip();
         StartCoroutine(TypeLine());
     }
 
@@ -82,6 +93,7 @@ public class Dialogue3 : MonoBehaviour
         {
             index++;
             textComponent.text = string.Empty;
+            PlayAudioClip();
             StartCoroutine(TypeLine());
         }
         else
@@ -95,6 +107,15 @@ public class Dialogue3 : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+    }
+
+    void PlayAudioClip()
+    {
+        if (audioClips.Length > index && audioClips[index] != null)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(audioClips[index]);
         }
     }
 }

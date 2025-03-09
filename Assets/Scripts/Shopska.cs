@@ -13,8 +13,6 @@ public class Shopska : MonoBehaviour
 
     void Start()
     {
-        //PlayerPrefs.DeleteKey(slowGraovskoKey);
-        //PlayerPrefs.Save();
         
         shopska1.SetActive(false);
         if (PlayerPrefs.GetInt("ShopskaDone", 0) == 0)

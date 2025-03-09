@@ -17,8 +17,7 @@ public class ResetPlayerPrefs : MonoBehaviour
     }
     public void YesOnClick()
     {
-        //PlayerPrefs.DeleteKey("Dialogue1Shown"); // Изтрива само този запис
-        PlayerPrefs.DeleteAll(); // Ако искаш да изчистиш ВСИЧКО (използвай с внимание!)
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         resetConfirmationPanel.SetActive(false);
     }

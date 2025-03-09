@@ -88,10 +88,8 @@ public class TakePhotoShopska : MonoBehaviour
         string fileName = "photo_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
 
-        // Save the photo
         byte[] bytes = photo.EncodeToPNG();
         File.WriteAllBytes(filePath, bytes);
-        //Debug.Log("Photo saved at: " + filePath);
 
         savedPhotoPathsShopska.Add(filePath);
         SavePhotoPathsShopska();
@@ -117,7 +115,6 @@ public class TakePhotoShopska : MonoBehaviour
     }
     public void LoadGallery()
     {
-        //delete old photos
         foreach (Transform child in galleryGrid)
         {
             Destroy(child.gameObject);

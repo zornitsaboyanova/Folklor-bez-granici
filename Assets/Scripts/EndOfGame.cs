@@ -22,8 +22,8 @@ public class EndOfGame : MonoBehaviour
     }
     public void MainMenuOnClick()
     {
-        //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.Save();
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Menus");
     }
     public void ExitGameEnter()
@@ -36,8 +36,8 @@ public class EndOfGame : MonoBehaviour
     }
     public void ExitGameOnClick()
     {
-        //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.Save();
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         Application.Quit();
     }
 }

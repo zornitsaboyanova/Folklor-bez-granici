@@ -67,7 +67,7 @@ public class Dialogue2 : MonoBehaviour
                 if (audioClips.Length > index && audioClips[index] != null)
                 {
                     audioSource.Stop();
-                    audioSource.PlayOneShot(audioClips[index]);
+                    //audioSource.PlayOneShot(audioClips[index]);
                 }
             }
         }

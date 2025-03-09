@@ -21,17 +21,14 @@ public class Dialogue1 : MonoBehaviour
     private const string dialogueKey = "Dialogue1Shown";
     void Start()
     {
-        //временно изчистване докато се тества играта
-        /*PlayerPrefs.DeleteKey("DialogueShown");
-        PlayerPrefs.Save();*/
 
         if (PlayerPrefs.GetInt(dialogueKey, 0) == 1)
         {
-            dialogueBox.SetActive(false); // Скриваме диалога и приключваме
+            dialogueBox.SetActive(false);
             return;
         }
 
-        PlayerPrefs.SetInt(dialogueKey, 1); // Записваме, че вече е стартирал
+        PlayerPrefs.SetInt(dialogueKey, 1);
         PlayerPrefs.Save();
 
         shopska = shopskaGameObject.GetComponent<Shopska>();
@@ -40,7 +37,6 @@ public class Dialogue1 : MonoBehaviour
         shopska.canPress = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -56,7 +52,6 @@ public class Dialogue1 : MonoBehaviour
                 if (audioClips.Length > index && audioClips[index] != null)
                 {
                     audioSource.Stop();
-                    audioSource.PlayOneShot(audioClips[index]);
                 }
             }
         }

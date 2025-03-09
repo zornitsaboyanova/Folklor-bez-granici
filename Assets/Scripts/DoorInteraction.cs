@@ -56,7 +56,6 @@ public class DoorInteraction : MonoBehaviour
                     Cursor.visible = true;
                     PlayerPrefs.SetInt(rodopskaDoneKey, 1);
                     PlayerPrefs.Save();
-                    //Pirinska.isActive = true;
                     SceneManager.LoadScene("Map");
                 }
                 else

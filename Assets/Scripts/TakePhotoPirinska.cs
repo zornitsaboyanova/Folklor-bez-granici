@@ -87,10 +87,8 @@ public class TakePhotoPirinska : MonoBehaviour
         string fileName = "photo_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
 
-        // Save the photo
         byte[] bytes = photo.EncodeToPNG();
         File.WriteAllBytes(filePath, bytes);
-        //Debug.Log("Photo saved at: " + filePath);
 
         savedPhotoPathsRodopska.Add(filePath);
         SavePhotoPathsRodopska();
@@ -116,7 +114,6 @@ public class TakePhotoPirinska : MonoBehaviour
     }
     public void LoadGallery()
     {
-        //delete old photos
         foreach (Transform child in galleryGrid)
         {
             Destroy(child.gameObject);

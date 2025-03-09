@@ -17,6 +17,7 @@ public class Rodopska : MonoBehaviour
 
     void Start()
     {
+
         rodopska1.SetActive(false);
         rawImage.SetActive(false);
         if (PlayerPrefs.GetInt("ShopskaDone", 0) == 1)

@@ -79,7 +79,6 @@ public class PhoneScan : MonoBehaviour
     }
     void NosiaWomanScan()
     {
-        //Храната се засича от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
@@ -90,7 +89,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (!isPlayingNosiaWoman)
                 {
-                    //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingNosiaWoman = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                 }
@@ -99,7 +97,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (isPlayingNosiaWoman)
                 {
-                    //Когато телефонът спре да засича храната и аудиото все още е пуснато - то да спре
                     isPlayingNosiaWoman = false;
                     audioSource1.Stop();
                     if (detectionCoroutine != null)
@@ -112,7 +109,6 @@ public class PhoneScan : MonoBehaviour
     }
     void NosiaManScan()
     {
-        //Храната се засича от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
@@ -123,7 +119,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (!isPlayingNosiaMan)
                 {
-                    //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingNosiaMan = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                 }
@@ -132,7 +127,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (isPlayingNosiaMan)
                 {
-                    //Когато телефонът спре да засича храната и аудиото все още е пуснато - то да спре
                     isPlayingNosiaMan = false;
                     audioSource2.Stop();
                     if (detectionCoroutine != null)
@@ -145,7 +139,6 @@ public class PhoneScan : MonoBehaviour
     }
     void FoodScan()
     {
-        //Храната се засича от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
@@ -156,7 +149,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (!isPlayingFood)
                 {
-                    //Когато телефонът засече храната на масата и аудиото не е пуснато - аудиото се пуска
                     isPlayingFood = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                 }
@@ -165,7 +157,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (isPlayingFood)
                 {
-                    //Когато телефонът спре да засича храната и аудиото все още е пуснато - то да спре
                     isPlayingFood = false;
                     audioSource3.Stop();
                     if (detectionCoroutine != null)
@@ -178,7 +169,6 @@ public class PhoneScan : MonoBehaviour
     }
     void ShevicaScan()
     {
-        //Шевиците се засичат от камерата, чрез raycast
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
@@ -189,7 +179,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (!isPlayingShevica)
                 {
-                    //Когато телефонът засече шевица и аудиото не е пуснато - аудиото се пуска
                     isPlayingShevica = true;
                     detectionCoroutine = StartCoroutine(DelaySound());
                 }
@@ -198,7 +187,6 @@ public class PhoneScan : MonoBehaviour
             {
                 if (isPlayingShevica)
                 {
-                    //Когато телефонът спре да засича шевицата, аудиото се спира.
                     isPlayingShevica = false;
                     audioSource4.Stop();
                     if (detectionCoroutine != null)
@@ -274,13 +262,14 @@ public class PhoneScan : MonoBehaviour
     }
     IEnumerator DelaySound()
     {
-        yield return new WaitForSeconds(1.0f); //изчаква се 1 секунда преди да се пусне аудиото
+        yield return new WaitForSeconds(1.0f);
 
         if (isPlayingNosiaWoman)
         {
-            audioSource1.Play(); //аудиото се пуска
+            audioSource1.Play(); 
 
-            yield return new WaitWhile(() => audioSource1.isPlaying);
+            //yield return new WaitWhile(() => audioSource1.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
@@ -302,7 +291,8 @@ public class PhoneScan : MonoBehaviour
         {
             audioSource2.Play();
 
-            yield return new WaitWhile(() => audioSource2.isPlaying);
+            //yield return new WaitWhile(() => audioSource2.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
@@ -324,7 +314,8 @@ public class PhoneScan : MonoBehaviour
         {
             audioSource3.Play();
 
-            yield return new WaitWhile( () => audioSource3.isPlaying);
+            //yield return new WaitWhile( () => audioSource3.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
@@ -346,7 +337,8 @@ public class PhoneScan : MonoBehaviour
         {
             audioSource4.Play();
 
-            yield return new WaitWhile(()=> audioSource4.isPlaying);
+            //yield return new WaitWhile(()=> audioSource4.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
@@ -368,7 +360,8 @@ public class PhoneScan : MonoBehaviour
         {
             audioSource5.Play();
 
-            yield return new WaitWhile(() => audioSource5.isPlaying);
+            //yield return new WaitWhile(() => audioSource5.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
@@ -390,7 +383,8 @@ public class PhoneScan : MonoBehaviour
         {
             audioSource6.Play();
 
-            yield return new WaitWhile(() => audioSource6.isPlaying);
+            //yield return new WaitWhile(() => audioSource6.isPlaying);
+            yield return new WaitForSeconds(3);
 
             if (SceneManager.GetActiveScene().name == "Shopska")
             {
