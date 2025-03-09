@@ -2827,7 +2827,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962315176}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a69fa3e4aba1b904283d8c399868c3e7, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e31e14b8e5de1d44ea457326e33b4d02, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -2895,7 +2895,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998697523}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 47440bc63a5437b459c04691498fbd4b, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e7b29ba9d6b6490408c51e5efa29bd38, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -3230,6 +3230,7 @@ GameObject:
   - component: {fileID: 2093547056}
   - component: {fileID: 2093547055}
   - component: {fileID: 2093547058}
+  - component: {fileID: 2093547059}
   m_Layer: 0
   m_Name: Rodopska
   m_TagString: Untagged
@@ -3251,8 +3252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rodopska: {fileID: 67732915}
   rodopska1: {fileID: 1791626442}
-  rawImage: {fileID: 1541047191}
+  horoVideoCanvas: {fileID: 1071693689}
   horoPlayer: {fileID: 1962315177}
+  horoSource: {fileID: 2093547059}
 --- !u!212 &2093547056
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3429,6 +3431,102 @@ PolygonCollider2D:
       - {x: 2.8105094, y: -5.6382427}
       - {x: 2.7874923, y: -5.380486}
   m_UseDelaunayMesh: 0
+--- !u!82 &2093547059
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093547054}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f2a4af3085a49fc4d8778eb16b4d106e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

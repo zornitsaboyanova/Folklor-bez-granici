@@ -7,9 +7,11 @@ using UnityEngine.Video;
 public class Rodopska : MonoBehaviour
 {
     [SerializeField] GameObject rodopska, rodopska1;
-    [SerializeField] GameObject rawImage;
+    [SerializeField] GameObject horoVideoCanvas;
 
     [SerializeField] VideoPlayer horoPlayer;
+
+    [SerializeField] AudioSource horoSource;
 
     bool canPress = true;
 
@@ -17,21 +19,21 @@ public class Rodopska : MonoBehaviour
 
     void Start()
     {
+        horoPlayer.audioOutputMode = VideoAudioOutputMode.None;
+
 
         rodopska1.SetActive(false);
-        rawImage.SetActive(false);
+        horoVideoCanvas.SetActive(false);
         if (PlayerPrefs.GetInt("ShopskaDone", 0) == 1)
         {
             if(PlayerPrefs.GetInt("RodopskaDone", 0) == 0)
             {
                 if (PlayerPrefs.GetInt(slowGraovskoHoroKey, 0) == 0)
                 {
-                    rawImage.SetActive(true);
                     StartCoroutine(WaitForHoro());
                 }
                 else
                 {
-                    rawImage.SetActive(false);
                     rodopska.SetActive(true);
                 }
             }
@@ -48,11 +50,15 @@ public class Rodopska : MonoBehaviour
     IEnumerator WaitForHoro()
     {
         canPress = false;
+        horoVideoCanvas.SetActive(true);
         horoPlayer.Play();
+        horoSource.Play();
         yield return new WaitForSeconds(50f);
+        horoPlayer.Stop();
+        horoSource.Stop();
         PlayerPrefs.SetInt(slowGraovskoHoroKey, 1);
         PlayerPrefs.Save();
-        rawImage.SetActive(false);
+        horoVideoCanvas.SetActive(false);
         canPress = true;
     }
     private void OnMouseOver()
